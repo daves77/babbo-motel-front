@@ -73,9 +73,9 @@ export default class Sprite {
   }
 
   // eslint-disable-next-line no-unused-vars
-  draw (ctx, cameraPerson) {
-    const x = this.gameObject.x + utils.withGrid(10.5) - cameraPerson.x
-    const y = this.gameObject.y - 6 - 16 + utils.withGrid(6) - cameraPerson.y
+  draw (ctx) {
+    const x = this.gameObject.x
+    const y = this.gameObject.y - 6
 
     const [frameX, frameY] = this.frame
     if (this.isLoaded) {
