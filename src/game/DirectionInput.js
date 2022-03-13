@@ -17,7 +17,6 @@ export default class DirectionInput {
   init () {
     document.addEventListener('keydown', (e) => {
       const dir = this.directionMap[e.code]
-      console.log(dir)
       if (dir && this.heldDirection.indexOf(dir) === -1) {
         this.heldDirection.unshift(dir)
       }

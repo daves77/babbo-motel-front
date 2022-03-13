@@ -1,6 +1,7 @@
 import gameConfig from '../gameConfig'
-import DirectionInput from './DirectionInput'
 import OverworldMap from './OverworldMap'
+import DirectionInput from './DirectionInput'
+import Person from './Person'
 
 export default class Overworld {
   constructor (config) {
@@ -18,7 +19,8 @@ export default class Overworld {
       Object.values(this.map.gameObjects.person).forEach(obj => {
         obj.update({
           direction: this.directionInput.direction,
-          map: this.map
+          map: this.map,
+          db: this.db
         })
       })
 
@@ -26,7 +28,6 @@ export default class Overworld {
         // ...Object.values(this.map.gameObjects.furniture),
         ...Object.values(this.map.gameObjects.person)
       ]
-
       // Draw game objects
       // sorting objects based on their position on the y axis so that they appear layered
       gameObjects.sort((a, b) => a.y - b.y).forEach((obj) => {
@@ -37,6 +38,30 @@ export default class Overworld {
     }
 
     step()
+  }
+
+  updatePersons (state) {
+    Object.values(this.map.gameObjects.person).forEach(person => {
+      if (!person.isPlayerControlled) {
+        if (state[person.id]) {
+          person.y = state[person.id].y
+          person.x = state[person.id].x
+          person.direction = state[person.id].direction
+        }
+      }
+    })
+  }
+
+  addPerson (user) {
+    this.map.gameObjects.person[user.id] = new Person({
+      x: user.x,
+      y: user.y,
+      src: this.images.char,
+      isPlayerControlled: user.isPlayerControlled,
+      playerRef: user.isPlayerControlled ? user.playerRef : null
+    })
+    this.map.mountObjects()
+    console.log(this.map.gameObjects.person)
   }
 
   init () {

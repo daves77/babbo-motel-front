@@ -67,6 +67,7 @@ export default class Sprite {
     }
     this.animationFrameProgress = this.animationFrameLimit
     this.currentAnimationFrame += 1
+    console.log(this.currentAnimationFrame)
     if (this.frame === undefined) {
       this.currentAnimationFrame = 0
     }

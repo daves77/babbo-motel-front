@@ -1,3 +1,4 @@
+import { set } from 'firebase/database'
 import GameObject from './GameObject'
 
 export default class Person extends GameObject {
@@ -5,6 +6,7 @@ export default class Person extends GameObject {
     super(config)
     this.movingProgressRemaining = 0
     this.isPlayerControlled = config.isPlayerControlled || false
+    this.playerRef = config.playerRef
     this.directionMap = {
       up: ['y', -1],
       down: ['y', 1],
@@ -15,9 +17,12 @@ export default class Person extends GameObject {
 
   updatePosition () {
     const [property, change] = this.directionMap[this.direction]
-    this[property] += change
-    console.log('updating')
     this.movingProgressRemaining -= 1
+    if (this.isPlayerControlled) {
+      this[property] += change
+      // update needs to go here
+      set(this.playerRef, { x: this.x, y: this.y, direction: this.direction, id: this.id })
+    }
   }
 
   updateSprite () {
@@ -33,7 +38,6 @@ export default class Person extends GameObject {
       this.updatePosition()
     } else {
       if (this.isPlayerControlled && state.direction) {
-        console.log('walking')
         this.startBehavior(state, {
           type: 'walk',
           direction: state.direction

@@ -1,19 +1,19 @@
 import images from './assets'
 import utils from './utils'
 
-import Person from './game/Person'
+// import Person from './game/Person'
 
 const map = {
   DemoRoom: {
     lowerSrc: images.Test,
     gameObjects: {
       person: {
-        hero: new Person({
-          x: utils.withGrid(4),
-          y: utils.withGrid(3),
-          src: images.char,
-          isPlayerControlled: true
-        })
+        // hero: new Person({
+        //   x: utils.withGrid(4),
+        //   y: utils.withGrid(3),
+        //   src: images.char,
+        //   isPlayerControlled: true
+        // })
       }
     },
     walls: {

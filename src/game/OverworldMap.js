@@ -5,7 +5,6 @@ export default class OverworldMap {
     this.lowerImage.src = config.lowerSrc
     this.gameObjects = config.gameObjects
     this.walls = config.walls
-    console.log(this.gameObjects)
   }
 
   drawLowerImage (ctx) {
