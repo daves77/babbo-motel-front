@@ -1,5 +1,5 @@
-import { set } from 'firebase/database'
 import GameObject from './GameObject'
+import { update } from 'firebase/database'
 
 export default class Person extends GameObject {
   constructor (config) {
@@ -21,7 +21,8 @@ export default class Person extends GameObject {
     if (this.isPlayerControlled) {
       this[property] += change
       // update needs to go here
-      set(this.playerRef, { x: this.x, y: this.y, direction: this.direction, id: this.id })
+      update(this.playerRef, { x: this.x, y: this.y })
+      // set(this.playerRef, { x: this.x, y: this.y, direction: this.direction, id: this.id })
     }
   }
 
@@ -34,10 +35,11 @@ export default class Person extends GameObject {
   }
 
   update (state) {
+    console.log(state)
     if (this.movingProgressRemaining > 0) {
       this.updatePosition()
     } else {
-      if (this.isPlayerControlled && state.direction) {
+      if (state.behavior === 'walk') {
         this.startBehavior(state, {
           type: 'walk',
           direction: state.direction
@@ -49,6 +51,7 @@ export default class Person extends GameObject {
 
   startBehavior (state, behavior) {
     this.direction = behavior.direction
+    console.log(this.direction)
     if (behavior.type === 'walk') {
       if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
         return

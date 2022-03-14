@@ -17,7 +17,7 @@ const map = {
       }
     },
     walls: {
-      ...utils.drawWallLineCoord([1, 2], [11, 2]),
+      ...utils.drawWallLineCoord([1, 1], [11, 1]),
       ...utils.drawWallLineCoord([0, 3], [0, 10]),
       ...utils.drawWallLineCoord([11, 3], [11, 10])
     }

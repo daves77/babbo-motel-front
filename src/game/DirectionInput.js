@@ -1,5 +1,8 @@
+import { update } from 'firebase/database'
+
 export default class DirectionInput {
-  constructor () {
+  constructor (config) {
+    this.playerRef = config.playerRef
     this.heldDirection = []
     this.directionMap = {
       ArrowUp: 'up',
@@ -20,6 +23,7 @@ export default class DirectionInput {
       if (dir && this.heldDirection.indexOf(dir) === -1) {
         this.heldDirection.unshift(dir)
       }
+      update(this.playerRef, { direction: this.direction, behavior: 'walk' })
     })
 
     document.addEventListener('keyup', (e) => {
@@ -28,6 +32,7 @@ export default class DirectionInput {
       if (index > -1) {
         this.heldDirection.splice(index, 1)
       }
+      update(this.playerRef, { direction: null, behavior: 'idle' })
     })
   }
 }

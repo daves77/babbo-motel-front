@@ -15,12 +15,11 @@ export default class Overworld {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
       this.map.drawLowerImage(this.ctx)
-
       Object.values(this.map.gameObjects.person).forEach(obj => {
         obj.update({
-          direction: this.directionInput.direction,
           map: this.map,
-          db: this.db
+          behavior: obj.behavior,
+          direction: obj.direction
         })
       })
 
@@ -42,10 +41,13 @@ export default class Overworld {
 
   updatePersons (state) {
     Object.values(this.map.gameObjects.person).forEach(person => {
-      if (!person.isPlayerControlled) {
-        if (state[person.id]) {
-          person.y = state[person.id].y
-          person.x = state[person.id].x
+      if (state[person.id]) {
+        person.y = state[person.id].y
+        person.x = state[person.id].x
+        person.behavior = state[person.id].behavior
+
+        // only updates if theres a change in direction
+        if (state[person.id].direction) {
           person.direction = state[person.id].direction
         }
       }
@@ -53,15 +55,19 @@ export default class Overworld {
   }
 
   addPerson (user) {
+    if (user.isPlayerControlled) {
+      this.playerRef = user.playerRef
+      this.directionInput = new DirectionInput({ playerRef: this.playerRef })
+      this.directionInput.init()
+    }
     this.map.gameObjects.person[user.id] = new Person({
       x: user.x,
       y: user.y,
       src: this.images.char,
       isPlayerControlled: user.isPlayerControlled,
-      playerRef: user.isPlayerControlled ? user.playerRef : null
+      playerRef: user.isPlayerControlled ? this.playerRef : null
     })
     this.map.mountObjects()
-    console.log(this.map.gameObjects.person)
   }
 
   init () {
@@ -72,9 +78,6 @@ export default class Overworld {
     })
 
     this.map.mountObjects()
-
-    this.directionInput = new DirectionInput()
-    this.directionInput.init()
 
     this.startGameLoop()
   }
