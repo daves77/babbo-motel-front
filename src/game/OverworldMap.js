@@ -7,11 +7,11 @@ export default class OverworldMap {
     this.walls = config.walls
   }
 
-  drawLowerImage (ctx) {
+  drawLowerImage (ctx, cameraPerson) {
     ctx.drawImage(
       this.lowerImage,
-      0,
-      0
+      utils.withGrid(10.5) - cameraPerson.x,
+      utils.withGrid(6) - cameraPerson.y
     )
   }
 
@@ -24,7 +24,7 @@ export default class OverworldMap {
     Object.keys(this.gameObjects.person).forEach(key => {
       const object = this.gameObjects.person[key]
       object.id = key
-      object.mount(this)
+      // object.mount(this)
     })
   }
 

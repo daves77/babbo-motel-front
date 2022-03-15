@@ -1,5 +1,5 @@
 import GameObject from './GameObject'
-import { update } from 'firebase/database'
+import { update as updateDb } from 'firebase/database'
 
 export default class Person extends GameObject {
   constructor (config) {
@@ -17,12 +17,11 @@ export default class Person extends GameObject {
 
   updatePosition () {
     const [property, change] = this.directionMap[this.direction]
+    this[property] += change
     this.movingProgressRemaining -= 1
+
     if (this.isPlayerControlled) {
-      this[property] += change
-      // update needs to go here
-      update(this.playerRef, { x: this.x, y: this.y })
-      // set(this.playerRef, { x: this.x, y: this.y, direction: this.direction, id: this.id })
+      updateDb(this.playerRef, { x: this.x, y: this.y })
     }
   }
 
@@ -35,7 +34,6 @@ export default class Person extends GameObject {
   }
 
   update (state) {
-    console.log(state)
     if (this.movingProgressRemaining > 0) {
       this.updatePosition()
     } else {
@@ -51,13 +49,12 @@ export default class Person extends GameObject {
 
   startBehavior (state, behavior) {
     this.direction = behavior.direction
-    console.log(this.direction)
     if (behavior.type === 'walk') {
       if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
         return
       }
     }
-    state.map.moveWall(this.x, this.y, this.direction)
+    // state.map.moveWall(this.x, this.y, this.direction)
     this.movingProgressRemaining = 16
     this.updateSprite()
   }

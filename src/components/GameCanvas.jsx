@@ -30,8 +30,8 @@ export default function GameCanvas () {
         playerRef = ref(db, `players/${user.uid}`)
         set(playerRef, {
           id: user.uid,
-          x: utils.withGrid(4),
-          y: utils.withGrid(4),
+          x: utils.withGrid(1),
+          y: utils.withGrid(3),
           direction: 'down'
         })
 

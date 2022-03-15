@@ -3,6 +3,7 @@ import { update } from 'firebase/database'
 export default class DirectionInput {
   constructor (config) {
     this.playerRef = config.playerRef
+    this.person = config.person
     this.heldDirection = []
     this.directionMap = {
       ArrowUp: 'up',
@@ -20,10 +21,10 @@ export default class DirectionInput {
   init () {
     document.addEventListener('keydown', (e) => {
       const dir = this.directionMap[e.code]
-      if (dir && this.heldDirection.indexOf(dir) === -1) {
+      if (dir && this.heldDirection.indexOf(dir) === -1 && this.person.movingProgressRemaining === 0) {
         this.heldDirection.unshift(dir)
+        update(this.playerRef, { direction: this.direction, behavior: 'walk' })
       }
-      update(this.playerRef, { direction: this.direction, behavior: 'walk' })
     })
 
     document.addEventListener('keyup', (e) => {
@@ -31,8 +32,8 @@ export default class DirectionInput {
       const index = this.heldDirection.indexOf(dir)
       if (index > -1) {
         this.heldDirection.splice(index, 1)
+        update(this.playerRef, { direction: null, behavior: this.heldDirection.length > 0 ? 'walk' : 'idle' })
       }
-      update(this.playerRef, { direction: null, behavior: 'idle' })
     })
   }
 }
