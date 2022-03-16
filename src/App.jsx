@@ -1,10 +1,15 @@
 import React from 'react'
+import { Routes, Route } from 'react-router'
 
 import GameCanvas from './components/GameCanvas'
+import CharacterCustomisation from './components/CharacterCusomisation'
 
 function App () {
   return (
-    <GameCanvas />
+    <Routes>
+      <Route path="/game" element={<GameCanvas/>} />
+      <Route path="/custom" element={<CharacterCustomisation/>} />
+    </Routes>
 
   )
 }

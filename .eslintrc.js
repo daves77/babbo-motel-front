@@ -18,6 +18,8 @@ module.exports = {
     'react'
   ],
   rules: {
-    'no-tabs': 0
+    'no-tabs': 0,
+    'no-mixed-spaces-and-tabs': 0,
+    'react/prop-types': 0
   }
 }
