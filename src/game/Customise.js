@@ -1,41 +1,36 @@
-import utils from '../utils'
 
 export default class Customise {
   constructor (config) {
+    this.canvas = config.canvas
     this.ctx = config.ctx
 
-    this.body = new Image()
-    this.body.src = config.body
-
-    this.eye = new Image()
-    this.eye.src = config.eye
-
-    this.outfit = new Image()
-    this.outfit.src = config.src
-
-    this.hair = new Image()
-    this.hair.src = config.src
+    this.Body = null
+    this.Eyes = null
+    this.Outfit = null
+    this.Hairstyle = null
+    this.Accessory = null
   }
 
-  drawAttribute (attribute) {
-    attribute.crossOrigin = 'anonymous'
-    this.ctx.drawImage(
-      attribute,
-      utils.withGrid(19),
-      utils.withGrid(2),
-      utils.withGrid(1),
-      utils.withGrid(2),
-      0,
-      0,
-      16,
-      32
-    )
+  refreshLoop () {
+    const step = () => {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+
+      const attributes = [this.Body, this.Eyes, this.Outfit, this.Hairstyle, this.Accessory]
+      attributes.forEach(attribute => {
+        if (attribute) { attribute.draw(this.ctx) }
+      })
+
+      requestAnimationFrame(() => step())
+    }
+
+    step()
+  }
+
+  updateAttribute (attribute, attributeObj) {
+    this[attribute] = attributeObj
   }
 
   init () {
-    this.drawAttribute(this.body)
-    this.drawAttribute(this.eye)
-    this.drawAttribute(this.outfit)
-    this.drawAttribute(this.hair)
+    this.refreshLoop()
   }
 }
