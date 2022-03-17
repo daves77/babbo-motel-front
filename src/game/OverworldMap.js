@@ -1,8 +1,10 @@
 import utils from '../utils'
+import OverworldEvent from './OverworldEvent'
 export default class OverworldMap {
   constructor (config) {
     this.lowerImage = new Image()
     this.lowerImage.src = config.lowerSrc
+    this.cutSceneSpaces = config.cutSceneSpaces
 
     this.upperImage = new Image()
     this.upperImage.src = config.upperSrc
@@ -27,6 +29,20 @@ export default class OverworldMap {
     )
   }
 
+  async startCutscene (events) {
+    this.isCutScenePlaying = true
+
+    for (let i = 0; i < events.length; i++) {
+      const eventHandler = new OverworldEvent({
+        event: events[i],
+        map: this
+      })
+
+      await eventHandler.init()
+    }
+    this.isCutScenePlaying = false
+  }
+
   isSpaceTaken (currentX, currentY, direction) {
     const { x, y } = utils.nextPosition(currentX, currentY, direction)
     return this.walls[`${x},${y}`] || false
@@ -35,9 +51,17 @@ export default class OverworldMap {
   mountObjects () {
     Object.keys(this.gameObjects.person).forEach(key => {
       const object = this.gameObjects.person[key]
+      console.log(key)
       object.id = key
       // object.mount(this)
     })
+  }
+
+  checkForFootstepCutscene (player) {
+    const match = this.cutSceneSpaces[`${player.x},${player.y}`]
+    if (!this.isCutscenePlaying && match) {
+      this.startCutscene(match[0].events)
+    }
   }
 
   addWall (x, y) {

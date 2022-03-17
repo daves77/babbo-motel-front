@@ -21,17 +21,20 @@ export default function Signup () {
     overworld.init({
       lowerSrc: gameConfig.SignUpRoom.lowerSrc,
       upperSrc: gameConfig.SignUpRoom.upperSrc,
-      gameObjects: gameConfig.SignUpRoom.gameObjects
+      gameObjects: gameConfig.SignUpRoom.gameObjects,
+      cutSceneSpaces: gameConfig.SignUpRoom.cutSceneSpaces
     })
   })
   return (
-		<div className='h-[198px] w-[352px] relative outline-dotted outline-1 outline-gray-600 m-auto mt-4 scale-[2] translate-y-2/4'>
-			<canvas
-				ref={canvasRef}
-				height='198px'
-				width='352'
-				style={{ imageRendering: 'pixelated' }}
-			/>
+		<div className="pt-80">
+			<div className='h-[198px] w-[352px] relative outline-dotted outline-1 outline-gray-600 m-auto mt-4 scale-[3] translate-y-2/4'>
+				<canvas
+					ref={canvasRef}
+					height='198px'
+					width='352'
+					style={{ imageRendering: 'pixelated' }}
+				/>
+			</div>
 		</div>
   )
 }

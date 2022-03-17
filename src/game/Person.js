@@ -37,7 +37,7 @@ export default class Person extends GameObject {
     if (this.movingProgressRemaining > 0) {
       this.updatePosition()
     } else {
-      if (state.behavior === 'walk') {
+      if (state.behavior === 'walk' && this.isPlayerControlled) {
         this.startBehavior(state, {
           type: 'walk',
           direction: state.direction

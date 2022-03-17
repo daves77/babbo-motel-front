@@ -88,10 +88,12 @@ export default class Overworld {
       lowerSrc: config.lowerSrc || gameConfig.MainRoom.lowerSrc,
       upperSrc: config.upperSrc || gameConfig.MainRoom.upperSrc,
       gameObjects: config.gameObjects || gameConfig.MainRoom.gameObjects,
-      walls: config.walls || gameConfig.MainRoom.walls
+      walls: config.walls || gameConfig.MainRoom.walls,
+      cutSceneSpaces: config.cutSceneSpaces || null
     })
 
     this.map.mountObjects()
+    this.map.checkForFootstepCutscene(this.player)
 
     this.startGameLoop()
   }

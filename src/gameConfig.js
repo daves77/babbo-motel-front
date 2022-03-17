@@ -1,7 +1,7 @@
 import images from './assets'
 import utils from './utils'
 
-import Person from './game/Person'
+import NPC from './game/NPC'
 
 const map = {
   MainRoom: {
@@ -28,12 +28,22 @@ const map = {
     upperSrc: images.SignUpRoomL2,
     gameObjects: {
       person: {
-        hero: new Person({
+        npc1: new NPC({
           x: utils.withGrid(7.5),
           y: utils.withGrid(10),
           src: images.char
         })
       }
+    },
+    cutSceneSpaces: {
+      [utils.asGridCoord(7.5, 10)]: [
+        {
+          events: [
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'walk', direction: 'down' }
+          ]
+        }
+      ]
     }
   }
 }
