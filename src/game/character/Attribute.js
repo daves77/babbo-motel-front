@@ -1,4 +1,4 @@
-import utils from '../utils'
+import utils from '../../utils'
 
 export default class Attribute {
   constructor (config) {
@@ -20,8 +20,8 @@ export default class Attribute {
         utils.withGrid(2),
         0,
         0,
-        16,
-        32
+        utils.withGrid(1),
+        utils.withGrid(2)
       )
     }
   }

@@ -8,6 +8,7 @@ export default class Overworld {
     this.images = config.images
     this.canvas = config.canvas
     this.ctx = this.canvas.getContext('2d')
+    this.player = config.player || null
   }
 
   startGameLoop () {
@@ -15,9 +16,10 @@ export default class Overworld {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
       const cameraPerson = this.player || { x: 0, y: 0 }
-      console.log(this.player)
 
       this.map.drawLowerImage(this.ctx, cameraPerson)
+      this.map.drawUpperImage(this.ctx, cameraPerson)
+
       Object.values(this.map.gameObjects.person).forEach((obj) => {
         obj.update({
           map: this.map,
@@ -64,26 +66,29 @@ export default class Overworld {
     this.map.gameObjects.person[user.id] = new Person({
       x: user.x,
       y: user.y,
+      currentAnimation: `idle-${user.direction}`,
       src: this.images.char,
       isPlayerControlled: user.isPlayerControlled,
       playerRef: user.isPlayerControlled ? this.playerRef : null
     })
+
     if (user.isPlayerControlled) {
       this.player = this.map.gameObjects.person[user.id]
       this.directionInput = new DirectionInput({
         playerRef: this.playerRef,
-        person: this.map.gameObjects.person[user.id]
+        person: this.player
       })
       this.directionInput.init()
     }
     this.map.mountObjects()
   }
 
-  init () {
+  init (config) {
     this.map = new OverworldMap({
-      lowerSrc: gameConfig.DemoRoom.lowerSrc,
-      gameObjects: gameConfig.DemoRoom.gameObjects,
-      walls: gameConfig.DemoRoom.walls
+      lowerSrc: config.lowerSrc || gameConfig.MainRoom.lowerSrc,
+      upperSrc: config.upperSrc || gameConfig.MainRoom.upperSrc,
+      gameObjects: config.gameObjects || gameConfig.MainRoom.gameObjects,
+      walls: config.walls || gameConfig.MainRoom.walls
     })
 
     this.map.mountObjects()

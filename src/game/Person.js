@@ -13,13 +13,13 @@ export default class Person extends GameObject {
       left: ['x', -1],
       right: ['x', 1]
     }
+    this.direction = config.direction || 'down'
   }
 
   updatePosition () {
     const [property, change] = this.directionMap[this.direction]
     this[property] += change
     this.movingProgressRemaining -= 1
-
     if (this.isPlayerControlled) {
       updateDb(this.playerRef, { x: this.x, y: this.y })
     }
@@ -51,6 +51,7 @@ export default class Person extends GameObject {
     this.direction = behavior.direction
     if (behavior.type === 'walk') {
       if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+        if (this.isPlayerControlled) updateDb(this.playerRef, { behavior: 'idle' })
         return
       }
     }

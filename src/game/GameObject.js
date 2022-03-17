@@ -7,12 +7,12 @@ export default class GameObject {
     this.y = config.y || 0
     this.direction = config.direction || 'down'
     this.type = config.type || 'person'
-
     this.sprite = new Sprite({
       src: config.src,
       gameObject: this,
       dimension: this.dimensions,
-      animations: config.animations
+      animations: config.animations,
+      currentAnimation: config.currentAnimation || null
     })
   }
 

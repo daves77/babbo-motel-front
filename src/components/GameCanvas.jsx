@@ -56,7 +56,7 @@ export default function GameCanvas () {
       images,
       player
     })
-    overworld.init()
+    overworld.init({})
 
     onValue(allPlayersRef, (snapshot) => {
       const state = snapshot.val()
@@ -68,6 +68,7 @@ export default function GameCanvas () {
       if (!player) {
         player = newPlayer
       }
+      console.log(newPlayer)
       overworld.addPerson({
         ...newPlayer,
         playerRef,

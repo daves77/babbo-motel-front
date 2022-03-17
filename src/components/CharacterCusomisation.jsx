@@ -3,7 +3,7 @@ import React, { useRef, useEffect, useState } from 'react'
 
 import AttributeButtons from './AttributeButtons'
 
-import Customise from '../game/Customise'
+import Customise from '../game/character/Customise'
 
 export default function CharacterCustomisation () {
   const canvasRef = useRef()
@@ -29,9 +29,9 @@ export default function CharacterCustomisation () {
 		<div className='max-w-7xl m-auto'>
 			<canvas
 				ref={canvasRef}
-				height='32'
-				width='16'
-				className='scale-[5] max-w-xl m-auto p-8'
+				height='32px'
+				width='16px'
+				className='scale-[5]  m-auto p-8'
 				style={{ imageRendering: 'pixelated' }}
 			/>
       {customise &&

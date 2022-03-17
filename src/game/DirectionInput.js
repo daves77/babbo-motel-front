@@ -21,8 +21,8 @@ export default class DirectionInput {
   init () {
     document.addEventListener('keydown', (e) => {
       const dir = this.directionMap[e.code]
-      if (dir && this.heldDirection.indexOf(dir) === -1 && this.person.movingProgressRemaining === 0) {
-        this.heldDirection.unshift(dir)
+      if (dir && this.heldDirection.length === 0 && this.person.movingProgressRemaining === 0) {
+        this.heldDirection.push(dir)
         update(this.playerRef, { direction: this.direction, behavior: 'walk' })
       }
     })
@@ -32,7 +32,7 @@ export default class DirectionInput {
       const index = this.heldDirection.indexOf(dir)
       if (index > -1) {
         this.heldDirection.splice(index, 1)
-        update(this.playerRef, { direction: null, behavior: this.heldDirection.length > 0 ? 'walk' : 'idle' })
+        update(this.playerRef, { behavior: this.heldDirection.length > 0 ? 'walk' : 'idle' })
       }
     })
   }

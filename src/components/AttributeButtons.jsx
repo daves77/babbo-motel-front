@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import useSingleLayer from '../hooks/useLayer'
 
-import Attribute from '../game/Attribute'
+import Attribute from '../game/character/Attribute'
 
 export default function AttributeButtons ({ customise, attributePlural, attributeSingular, limit }) {
   const [attributeUrl, setAttributeUrl] = useSingleLayer(attributePlural, attributeSingular, limit)
