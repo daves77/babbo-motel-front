@@ -90,6 +90,8 @@ export default class Sprite {
         utils.withGrid(this.dimensions.x),
         utils.withGrid(this.dimensions.y)
       )
+      ctx.font = '7px Arial'
+      ctx.fillText('Test', x, y + 5)
     }
     this.updateAnimationProgress()
   }

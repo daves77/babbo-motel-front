@@ -2,6 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import axios from 'axios'
 
 import ErrorMessage from '../components/ErrorMessage'
 
@@ -21,9 +22,10 @@ export default function LoginForm () {
   } = useForm({
     resolver: yupResolver(schema)
   })
-  const onSubmit = (data) => {
-    console.log(data.email)
-    console.log(data.password)
+  const onSubmit = async (data) => {
+    console.log(data)
+    const { email, password } = data
+    await axios.post('http://localhost:3004/api/user/login/', { email, password })
   }
   console.log(errors)
 

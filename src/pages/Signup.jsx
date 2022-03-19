@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 
 import TextBox from '../components/TextBox'
-import SignupForm from '../components/LoginModal'
+import LoginModal from '../components/LoginModal'
 
 import images from '../assets'
 import Overworld from '../game/Overworld'
@@ -25,7 +25,8 @@ export default function Signup () {
       lowerSrc: gameConfig.SignUpRoom.lowerSrc,
       upperSrc: gameConfig.SignUpRoom.upperSrc,
       gameObjects: gameConfig.SignUpRoom.gameObjects,
-      cutSceneSpaces: gameConfig.SignUpRoom.cutSceneSpaces
+      cutSceneSpaces: gameConfig.SignUpRoom.cutSceneSpaces,
+      isCutScene: true
     })
   })
 
@@ -41,7 +42,7 @@ export default function Signup () {
 						/>
 						<TextBox />
 					</div>
-				<SignupForm />
+				<LoginModal />
 			</div>
 		</>
   )

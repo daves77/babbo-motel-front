@@ -39,7 +39,6 @@ export default class Overworld {
           obj.sprite.draw(this.ctx, cameraPerson)
         })
 
-      this.map.drawUpperImage(this.ctx, cameraPerson)
       requestAnimationFrame(() => step())
     }
 
@@ -93,7 +92,9 @@ export default class Overworld {
     })
 
     this.map.mountObjects()
-    this.map.checkForFootstepCutscene(this.player)
+    if (config.isCutScene) {
+      this.map.checkForFootstepCutscene(this.player)
+    }
 
     this.startGameLoop()
   }
