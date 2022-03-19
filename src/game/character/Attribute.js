@@ -25,4 +25,14 @@ export default class Attribute {
       )
     }
   }
+
+  drawSpriteSheet (ctx) {
+    if (this.isLoaded) {
+      ctx.drawImage(
+        this.image,
+        0,
+        0
+      )
+    }
+  }
 }
