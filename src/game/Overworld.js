@@ -18,7 +18,6 @@ export default class Overworld {
       const cameraPerson = this.player || { x: 0, y: 0 }
 
       this.map.drawLowerImage(this.ctx, cameraPerson)
-      this.map.drawUpperImage(this.ctx, cameraPerson)
 
       Object.values(this.map.gameObjects.person).forEach((obj) => {
         obj.update({
@@ -40,6 +39,7 @@ export default class Overworld {
           obj.sprite.draw(this.ctx, cameraPerson)
         })
 
+      this.map.drawUpperImage(this.ctx, cameraPerson)
       requestAnimationFrame(() => step())
     }
 
@@ -83,7 +83,7 @@ export default class Overworld {
     this.map.mountObjects()
   }
 
-  init (config) {
+  init (config = {}) {
     this.map = new OverworldMap({
       lowerSrc: config.lowerSrc || gameConfig.MainRoom.lowerSrc,
       upperSrc: config.upperSrc || gameConfig.MainRoom.upperSrc,

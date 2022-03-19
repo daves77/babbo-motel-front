@@ -1,3 +1,5 @@
+import utils from '../utils'
+
 export default class OverworldEvent {
   constructor ({ map, event }) {
     this.map = map
@@ -10,8 +12,17 @@ export default class OverworldEvent {
       map: this.map
     }, {
       type: 'stand',
-      direction: this.event.direction
+      direction: this.event.direction,
+      time: this.event.time
     })
+
+    const completeHandler = e => {
+      if (e.detail.whoId === this.event.who) {
+        document.removeEventListener('PersonStandComplete', completeHandler)
+        resolve()
+      }
+    }
+    document.addEventListener('PersonStandComplete', completeHandler)
   }
 
   walk (resolve) {
@@ -34,18 +45,26 @@ export default class OverworldEvent {
     document.addEventListener('PersonWalkingComplete', completeHandler)
   }
 
-  // textMessage (resolve) {
-  //   if (this.event.faceHero) {
-  //     const obj = this.map.gameObjects[this.event.faceHero]
-  //     obj.direction = utils.oppositeDirection(this.map.gameObjects.hero.direction)
-  //   }
+  textMessage (resolve) {
+    utils.emitEvent('TextMessage', { text: this.event.text })
+    const completeHandler = () => {
+      document.removeEventListener('TextMessageDone', completeHandler)
+      resolve()
+    }
 
-  //   const message = new TextMessage({
-  //     text: this.event.text,
-  //     onComplete: () => resolve()
-  //   })
-  //   message.init(document.querySelector('.game-container'))
-  // }
+    document.addEventListener('TextMessageDone', completeHandler)
+  }
+
+  signUp (resolve) {
+    utils.emitEvent('SignUp', {})
+
+    const completeHandler = () => {
+      document.removeEventListener('TextMessageDone', completeHandler)
+      resolve()
+    }
+
+    document.addEventListener('TextMessageDone', completeHandler)
+  }
 
   // changeMap (resolve) {
   //   const sceneTransition = new SceneTransition()

@@ -1,5 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 
+import TextBox from '../components/TextBox'
+import SignupForm from '../components/SignupForm'
+
 import images from '../assets'
 import Overworld from '../game/Overworld'
 import gameConfig from '../gameConfig'
@@ -13,7 +16,7 @@ export default function Signup () {
       images,
       player: {
         x: utils.withGrid(7.5),
-        y: utils.withGrid(10),
+        y: utils.withGrid(14),
         isPlayerControlled: true
       }
     })
@@ -25,16 +28,21 @@ export default function Signup () {
       cutSceneSpaces: gameConfig.SignUpRoom.cutSceneSpaces
     })
   })
+
   return (
-		<div className="pt-80">
-			<div className='h-[198px] w-[352px] relative outline-dotted outline-1 outline-gray-600 m-auto mt-4 scale-[3] translate-y-2/4'>
-				<canvas
-					ref={canvasRef}
-					height='198px'
-					width='352'
-					style={{ imageRendering: 'pixelated' }}
-				/>
+		<>
+			<div className='w-full h-screen '>
+					<div className='h-[198px] w-[352px] absolute bottom-0 left-0 right-0 top-0 m-auto outline-dotted outline-1 outline-gray-600 scale-[3]'>
+						<canvas
+							ref={canvasRef}
+							height='198px'
+							width='352'
+							style={{ imageRendering: 'pixelated' }}
+						/>
+						<TextBox />
+					</div>
+				<SignupForm />
 			</div>
-		</div>
+		</>
   )
 }

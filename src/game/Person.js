@@ -1,5 +1,6 @@
 import GameObject from './GameObject'
 import { update as updateDb } from 'firebase/database'
+import utils from '../utils'
 
 export default class Person extends GameObject {
   constructor (config) {
@@ -54,9 +55,17 @@ export default class Person extends GameObject {
         if (this.isPlayerControlled) updateDb(this.playerRef, { behavior: 'idle' })
         return
       }
+      // state.map.moveWall(this.x, this.y, this.direction)
+      this.movingProgressRemaining = 16
+      this.updateSprite()
+    } else if (behavior.type === 'stand') {
+      this.isStanding = true
+      setTimeout(() => {
+        utils.emitEvent('PersonStandingComplete', {
+          whoId: this.id
+        })
+        this.isStanding = false
+      }, behavior.time)
     }
-    // state.map.moveWall(this.x, this.y, this.direction)
-    this.movingProgressRemaining = 16
-    this.updateSprite()
   }
 }
