@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 
 import TextBox from '../components/TextBox'
-import SignupForm from '../components/SignupForm'
+import SignupForm from '../components/LoginModal'
 
 import images from '../assets'
 import Overworld from '../game/Overworld'
