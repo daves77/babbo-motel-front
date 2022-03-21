@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 import axios from 'axios'
 
 import ErrorMessage from '../components/ErrorMessage'
+import Spinner from '../components/Spinner'
 
 const schema = yup.object({
   email: yup
@@ -15,6 +17,8 @@ const schema = yup.object({
 })
 
 export default function LoginForm () {
+  const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -23,11 +27,19 @@ export default function LoginForm () {
     resolver: yupResolver(schema)
   })
   const onSubmit = async (data) => {
-    console.log(data)
-    const { email, password } = data
-    await axios.post('http://localhost:3004/api/user/login/', { email, password })
+    setIsLoading(true)
+    try {
+      console.log(data)
+      const { email, password } = data
+      const res = await axios.post('http://localhost:3004/api/user/login/', { email, password })
+      localStorage.setItem('token', `Bearer ${res.data.token}`)
+      navigate('/game', { replace: true })
+    } catch (err) {
+      console.log('failed to login')
+      console.log(err)
+      setIsLoading(false)
+    }
   }
-  console.log(errors)
 
   return (
 		<form
@@ -98,7 +110,9 @@ export default function LoginForm () {
 				<button
 					type='submit'
 					className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
-					Login
+            {isLoading
+              ? <div className="flex items-center"><Spinner /> Logging you in.. </div>
+              : 'Login'}
 				</button>
 			</div>
 		</form>

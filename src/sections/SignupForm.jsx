@@ -26,7 +26,6 @@ export default function SignupForm ({ setCurrentState }) {
     resolver: yupResolver(schema)
   })
   const onSubmit = async (data) => {
-    console.log(data)
     const { email, password } = data
     await axios.post('http://localhost:3004/api/user/signup/', { email, password })
   }

@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react'
-import images from '../assets'
+import React, { useEffect, useRef, useContext } from 'react'
+import axios from 'axios'
 
+import images from '../assets'
 import Overworld from '../game/Overworld'
 
 import app from '../firebaseConfig'
@@ -13,9 +14,12 @@ import {
   onDisconnect
 } from 'firebase/database'
 import { getAuth, onAuthStateChanged, signInAnonymously } from 'firebase/auth'
+import { Context, loadUserAction } from '../store'
+
 import utils from '../utils'
 
 export default function GameCanvas () {
+  const { dispatch } = useContext(Context)
   const canvasRef = useRef()
 
   const auth = getAuth(app)
@@ -49,33 +53,41 @@ export default function GameCanvas () {
   })
 
   useEffect(() => {
-    const allPlayersRef = ref(db, 'players')
+    (async () => {
+      console.log('running?')
+      const res = await axios.get('http://localhost:3004/api/user/info', { headers: { Authorization: `${localStorage.getItem('token')}` } })
+      console.log(res.data)
 
-    const overworld = new Overworld({
-      canvas: canvasRef.current,
-      images,
-      player
-    })
-    overworld.init({})
+      dispatch(loadUserAction(res.data))
 
-    onValue(allPlayersRef, (snapshot) => {
-      const state = snapshot.val()
-      overworld.updatePersons(state)
-    })
+      const allPlayersRef = ref(db, 'players')
 
-    onChildAdded(allPlayersRef, (snapshot) => {
-      const newPlayer = snapshot.val()
-      if (!player) {
-        player = newPlayer
-      }
-      console.log(newPlayer)
-      overworld.addPerson({
-        ...newPlayer,
-        playerRef,
-        isPlayerControlled: player.id === newPlayer.id
+      const overworld = new Overworld({
+        canvas: canvasRef.current,
+        images,
+        player
       })
-    })
-  })
+      overworld.init({})
+
+      onValue(allPlayersRef, (snapshot) => {
+        const state = snapshot.val()
+        overworld.updatePersons(state)
+      })
+
+      onChildAdded(allPlayersRef, (snapshot) => {
+        const newPlayer = snapshot.val()
+        if (!player) {
+          player = newPlayer
+        }
+        console.log(newPlayer)
+        overworld.addPerson({
+          ...newPlayer,
+          playerRef,
+          isPlayerControlled: player.id === newPlayer.id
+        })
+      })
+    })()
+  }, [])
   return (
 		<div className='h-[198px] w-[352px] relative outline-dotted outline-1 outline-gray-600 m-auto mt-4 scale-[2] translate-y-2/4'>
 			<canvas

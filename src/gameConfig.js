@@ -39,17 +39,17 @@ const map = {
       [utils.asGridCoord(7.5, 14)]: [
         {
           events: [
-            // { who: 'npc1', type: 'walk', direction: 'down' },
-            // { who: 'npc1', type: 'walk', direction: 'down' },
-            // { who: 'npc1', type: 'walk', direction: 'down' },
-            // { who: 'npc1', type: 'walk', direction: 'down' },
-            // { who: 'npc1', type: 'walk', direction: 'down' },
-            // { who: 'npc1', type: 'stand', direction: 'left', time: 800 },
-            // { who: 'npc1', type: 'stand', direction: 'right', time: 800 },
-            // { who: 'npc1', type: 'stand', direction: 'down', time: 800 }
-            // { type: 'textMessage', text: 'Hey welcome! It\'s been awhile since I\'ve seen a new face around here!' },
-            // { type: 'textMessage', text: 'You look like you\'re new around here.. ' },
-            // { type: 'textMessage', text: 'But!! You do look kind of familiar.. Remind me who you are again?' },
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'stand', direction: 'left', time: 800 },
+            { who: 'npc1', type: 'stand', direction: 'right', time: 800 },
+            { who: 'npc1', type: 'stand', direction: 'down', time: 800 },
+            { type: 'textMessage', text: 'Hey welcome! It\'s been awhile since I\'ve seen a new face around here!' },
+            { type: 'textMessage', text: 'You look like you\'re new around here.. ' },
+            { type: 'textMessage', text: 'But!! You do look kind of familiar.. Remind me who you are again?' },
             { type: 'signUp' }
           ]
         }

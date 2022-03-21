@@ -2,20 +2,18 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
-import store from './store'
+
+import { StoreProvider } from './store'
 
 import { BrowserRouter as Router } from 'react-router-dom'
-import { Provider } from 'react-redux'
-
-store.subscribe(() => console.log(store.getState()))
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-    <App />
-    </Router>
-  </Provider>,
-  document.getElementById('root')
+	<StoreProvider>
+		<Router>
+			<App />
+		</Router>
+	</StoreProvider>,
+	document.getElementById('root')
 )
 
 // If you want to start measuring performance in your app, pass a function

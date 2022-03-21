@@ -1,13 +1,29 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import React, { useReducer } from 'react'
 
-import playerReducer from './reducers/playerReducer'
+const SET_USER = 'SET_USER'
 
-const reducers = combineReducers({
-  player: playerReducer
-})
+const initialState = { user: {} }
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
+export const storeReducer = (state, action) => {
+  switch (action.type) {
+    case SET_USER:
+      return { ...state, user: action.payload.user }
+    default:
+      return state
+  }
+}
 
-export default store
+export const loadUserAction = (user) => {
+  return {
+    type: SET_USER,
+    payload: { user }
+  }
+}
+
+export const Context = React.createContext({ store: initialState })
+const { Provider } = Context
+
+export const StoreProvider = ({ children }) => {
+  const [store, dispatch] = useReducer(storeReducer, initialState)
+  return <Provider value={{ store, dispatch }}>{children}</Provider>
+}

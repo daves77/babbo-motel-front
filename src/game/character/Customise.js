@@ -1,10 +1,18 @@
 
+import utils from '../../utils'
 export default class Customise {
   constructor (config) {
     this.canvas = config.canvas
     this.ctx = config.ctx
 
     this.attributes = {}
+  }
+
+  get spriteAttributes () {
+    return Object.keys(this.attributes).reduce((attributeObj, currentAttribute) => {
+      attributeObj[currentAttribute] = this.attributes[currentAttribute].image.src
+      return attributeObj
+    }, {})
   }
 
   refreshLoop () {
@@ -30,8 +38,9 @@ export default class Customise {
       }
     })
 
-    const image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
-    window.location.href = image
+    const spritesheet = canvas.toDataURL()
+    const blob = utils.dataURItoBlob(spritesheet)
+    return blob
   }
 
   updateAttribute (attribute, attributeObj) {
