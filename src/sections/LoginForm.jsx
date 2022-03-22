@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
-import axios from 'axios'
 
 import ErrorMessage from '../components/ErrorMessage'
 import Spinner from '../components/Spinner'
@@ -16,9 +14,7 @@ const schema = yup.object({
   password: yup.string().required('Please enter a password!')
 })
 
-export default function LoginForm () {
-  const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(false)
+export default function LoginForm ({ onSubmit, isLoading }) {
   const {
     register,
     handleSubmit,
@@ -26,20 +22,6 @@ export default function LoginForm () {
   } = useForm({
     resolver: yupResolver(schema)
   })
-  const onSubmit = async (data) => {
-    setIsLoading(true)
-    try {
-      console.log(data)
-      const { email, password } = data
-      const res = await axios.post('http://localhost:3004/api/user/login/', { email, password })
-      localStorage.setItem('token', `Bearer ${res.data.token}`)
-      navigate('/game', { replace: true })
-    } catch (err) {
-      console.log('failed to login')
-      console.log(err)
-      setIsLoading(false)
-    }
-  }
 
   return (
 		<form

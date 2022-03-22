@@ -7,7 +7,8 @@ const initialState = { user: {} }
 export const storeReducer = (state, action) => {
   switch (action.type) {
     case SET_USER:
-      return { ...state, user: action.payload.user }
+      console.log(action.payload.user)
+      return { ...state, user: JSON.parse(JSON.stringify(action.payload.user)) }
     default:
       return state
   }

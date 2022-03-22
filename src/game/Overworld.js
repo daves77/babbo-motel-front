@@ -66,11 +66,10 @@ export default class Overworld {
       x: user.x,
       y: user.y,
       currentAnimation: `idle-${user.direction}`,
-      src: this.images.char,
+      src: user.sprite,
       isPlayerControlled: user.isPlayerControlled,
       playerRef: user.isPlayerControlled ? this.playerRef : null
     })
-
     if (user.isPlayerControlled) {
       this.player = this.map.gameObjects.person[user.id]
       this.directionInput = new DirectionInput({

@@ -2,7 +2,6 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import axios from 'axios'
 
 import ErrorMessage from '../components/ErrorMessage'
 
@@ -17,7 +16,7 @@ const schema = yup.object({
     .oneOf([yup.ref('password'), null], "Passwords don't match!")
 })
 
-export default function SignupForm ({ setCurrentState }) {
+export default function SignupForm ({ setCurrentState, onSubmit, isLoading }) {
   const {
     register,
     handleSubmit,
@@ -25,11 +24,6 @@ export default function SignupForm ({ setCurrentState }) {
   } = useForm({
     resolver: yupResolver(schema)
   })
-  const onSubmit = async (data) => {
-    const { email, password } = data
-    await axios.post('http://localhost:3004/api/user/signup/', { email, password })
-  }
-  console.log(errors)
 
   return (
 		<form
