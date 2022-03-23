@@ -21,7 +21,20 @@ const map = {
       ...utils.drawWallLineCoord([1, 1], [11, 1]),
       ...utils.drawWallLineCoord([0, 3], [0, 10]),
       ...utils.drawWallLineCoord([11, 3], [11, 10])
+    },
+    cutSceneSpaces: {
+      [utils.asGridCoord(15, 11)]: [
+        {
+          events: [
+            { type: 'changeMap', map: 'Cafe' }
+          ]
+        }
+      ]
     }
+  },
+  Cafe: {
+    lowerSrc: images.CafeRoomL1,
+    uppserSrc: images.CafeRoomL2
   },
   SignUpRoom: {
     lowerSrc: images.SignUpRoomL1,
@@ -54,6 +67,7 @@ const map = {
           ]
         }
       ]
+
     }
   }
 }

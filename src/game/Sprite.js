@@ -46,6 +46,7 @@ export default class Sprite {
     this.animationFrameProgress = this.animationFrameLimit
 
     this.gameObject = config.gameObject
+    this.name = config.name
   }
 
   get frame () {
@@ -76,7 +77,6 @@ export default class Sprite {
   draw (ctx, cameraPerson) {
     const x = this.gameObject.x + utils.withGrid(10.5) - cameraPerson.x
     const y = this.gameObject.y - 6 - 16 + utils.withGrid(6) - cameraPerson.y
-    console.log(this.frame)
     const [frameX, frameY] = this.frame
     if (this.isLoaded) {
       ctx.drawImage(
@@ -90,8 +90,10 @@ export default class Sprite {
         utils.withGrid(this.dimensions.x),
         utils.withGrid(this.dimensions.y)
       )
-      ctx.font = '7px Arial'
-      ctx.fillText('Test', x, y + 5)
+      if (this.name) {
+        ctx.font = '10px Arial'
+        ctx.fillText(this.name, x - (this.name.length + 2), y + 5)
+      }
     }
     this.updateAnimationProgress()
   }

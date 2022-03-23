@@ -59,7 +59,8 @@ export default function GameCanvas () {
                 x: utils.withGrid(6),
                 y: utils.withGrid(7),
                 direction: 'down',
-                sprite: userInfo.sprite.main
+                sprite: userInfo.sprite.main,
+                username: userInfo.username
               })
 
               onDisconnect(playerRef).remove()

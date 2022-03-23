@@ -18,6 +18,7 @@ export default class Overworld {
       const cameraPerson = this.player || { x: 0, y: 0 }
 
       this.map.drawLowerImage(this.ctx, cameraPerson)
+      this.map.drawUpperImage(this.ctx, cameraPerson)
 
       Object.values(this.map.gameObjects.person).forEach((obj) => {
         obj.update({
@@ -67,6 +68,7 @@ export default class Overworld {
       y: user.y,
       currentAnimation: `idle-${user.direction}`,
       src: user.sprite,
+      username: user.username,
       isPlayerControlled: user.isPlayerControlled,
       playerRef: user.isPlayerControlled ? this.playerRef : null
     })
@@ -91,6 +93,7 @@ export default class Overworld {
     })
 
     this.map.mountObjects()
+
     if (config.isCutScene) {
       this.map.checkForFootstepCutscene(this.player)
     }
