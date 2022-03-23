@@ -77,7 +77,6 @@ export default function GameCanvas () {
           if (!player) {
             player = newPlayer
           }
-          console.log(playerRef)
           overworld.addPerson({
             ...newPlayer,
             playerRef,
@@ -88,6 +87,8 @@ export default function GameCanvas () {
     }
   }, [store.user])
   return (
+<div className="pt-80">
+
 		<div className='h-[198px] w-[352px] relative outline-dotted outline-1 outline-gray-600 m-auto mt-4 scale-[2] translate-y-2/4'>
 			<canvas
 				ref={canvasRef}
@@ -96,5 +97,6 @@ export default function GameCanvas () {
 				style={{ imageRendering: 'pixelated' }}
 			/>
 		</div>
+</div>
   )
 }

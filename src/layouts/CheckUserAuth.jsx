@@ -13,7 +13,6 @@ export default function CheckUserAuth ({ children }) {
         if (token) {
           const res = await axios.get('http://localhost:3004/api/user/info', { headers: { Authorization: token } })
           dispatch(loadUserAction(res.data))
-          console.log(res.data.sprite)
           if (!res.data.sprite) {
             navigate('/custom', { replace: true })
           } else {
@@ -23,7 +22,6 @@ export default function CheckUserAuth ({ children }) {
           throw new Error('no token found')
         }
       } catch (err) {
-        console.log(err)
         navigate('/signup', { replace: true })
       }
     })()

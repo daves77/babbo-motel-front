@@ -2,15 +2,16 @@ import utils from '../utils'
 import OverworldEvent from './OverworldEvent'
 export default class OverworldMap {
   constructor (config) {
+    this.overworld = null
     this.lowerImage = new Image()
     this.lowerImage.src = config.lowerSrc
-    this.cutSceneSpaces = config.cutSceneSpaces
+    this.cutSceneSpaces = config.cutSceneSpaces || []
 
     this.upperImage = new Image()
     this.upperImage.src = config.upperSrc
 
     this.gameObjects = config.gameObjects
-    this.walls = config.walls
+    this.walls = config.walls || []
   }
 
   drawLowerImage (ctx, cameraPerson) {
@@ -51,7 +52,6 @@ export default class OverworldMap {
   mountObjects () {
     Object.keys(this.gameObjects.person).forEach(key => {
       const object = this.gameObjects.person[key]
-      console.log(key)
       object.id = key
       // object.mount(this)
     })
@@ -59,6 +59,7 @@ export default class OverworldMap {
 
   checkForFootstepCutscene (player) {
     const match = this.cutSceneSpaces[`${player.x},${player.y}`]
+    console.log(match)
     if (!this.isCutscenePlaying && match) {
       this.startCutscene(match[0].events)
     }

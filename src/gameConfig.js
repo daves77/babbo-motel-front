@@ -33,8 +33,18 @@ const map = {
     }
   },
   Cafe: {
-    lowerSrc: images.CafeRoomL1,
-    uppserSrc: images.CafeRoomL2
+    lowerSrc: images.CafeL1,
+    upperSrc: images.CafeL2,
+    gameObjects: {
+      person: {
+        // hero: new Person({
+        //   x: utils.withGrid(4),
+        //   y: utils.withGrid(3),
+        //   src: images.char,
+        //   isPlayerControlled: true
+        // })
+      }
+    }
   },
   SignUpRoom: {
     lowerSrc: images.SignUpRoomL1,
@@ -52,17 +62,17 @@ const map = {
       [utils.asGridCoord(7.5, 14)]: [
         {
           events: [
-            // { who: 'npc1', type: 'walk', direction: 'down' },
-            // { who: 'npc1', type: 'walk', direction: 'down' },
-            // { who: 'npc1', type: 'walk', direction: 'down' },
-            // { who: 'npc1', type: 'walk', direction: 'down' },
-            // { who: 'npc1', type: 'walk', direction: 'down' },
-            // { who: 'npc1', type: 'stand', direction: 'left', time: 800 },
-            // { who: 'npc1', type: 'stand', direction: 'right', time: 800 },
-            // { who: 'npc1', type: 'stand', direction: 'down', time: 800 },
-            // { type: 'textMessage', text: 'Hey welcome! It\'s been awhile since I\'ve seen a new face around here!' },
-            // { type: 'textMessage', text: 'You look like you\'re new around here.. ' },
-            // { type: 'textMessage', text: 'But!! You do look kind of familiar.. Remind me who you are again?' },
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'stand', direction: 'left', time: 800 },
+            { who: 'npc1', type: 'stand', direction: 'right', time: 800 },
+            { who: 'npc1', type: 'stand', direction: 'down', time: 800 },
+            { type: 'textMessage', text: 'Hey welcome! It\'s been awhile since I\'ve seen a new face around here!' },
+            { type: 'textMessage', text: 'You look like you\'re new around here.. ' },
+            { type: 'textMessage', text: 'But!! You do look kind of familiar.. Remind me who you are again?' },
             { type: 'signUp' }
           ]
         }

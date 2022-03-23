@@ -1,4 +1,5 @@
 import utils from '../utils'
+import config from '../gameConfig'
 
 export default class OverworldEvent {
   constructor ({ map, event }) {
@@ -43,6 +44,11 @@ export default class OverworldEvent {
       }
     }
     document.addEventListener('PersonWalkingComplete', completeHandler)
+  }
+
+  changeMap (resolve) {
+    this.map.overworld.initMap(config[this.event.map])
+    resolve()
   }
 
   textMessage (resolve) {

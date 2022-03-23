@@ -20,14 +20,8 @@ export default function Signup () {
         isPlayerControlled: true
       }
     })
-
-    overworld.init({
-      lowerSrc: gameConfig.SignUpRoom.lowerSrc,
-      upperSrc: gameConfig.SignUpRoom.upperSrc,
-      gameObjects: gameConfig.SignUpRoom.gameObjects,
-      cutSceneSpaces: gameConfig.SignUpRoom.cutSceneSpaces,
-      isCutScene: true
-    })
+    gameConfig.SignUpRoom.isCutScene = true
+    overworld.init(gameConfig.SignUpRoom)
   })
 
   return (

@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import gameConfig from '../gameConfig'
 import OverworldMap from './OverworldMap'
 import DirectionInput from './DirectionInput'
@@ -46,6 +48,15 @@ export default class Overworld {
     step()
   }
 
+  bindPlayerPositionCheck () {
+    document.addEventListener('PersonWalkingComplete', (e) => {
+      if (e.detail.id === this.player.id) {
+        console.log(this.player.x, this.player.y)
+        this.map.checkForFootstepCutscene(this.player)
+      }
+    })
+  }
+
   updatePersons (state) {
     Object.values(this.map.gameObjects.person).forEach((person) => {
       if (state[person.id]) {
@@ -78,25 +89,25 @@ export default class Overworld {
         playerRef: this.playerRef,
         person: this.player
       })
+      this.bindPlayerPositionCheck()
       this.directionInput.init()
     }
     this.map.mountObjects()
   }
 
-  init (config = {}) {
-    this.map = new OverworldMap({
-      lowerSrc: config.lowerSrc || gameConfig.MainRoom.lowerSrc,
-      upperSrc: config.upperSrc || gameConfig.MainRoom.upperSrc,
-      gameObjects: config.gameObjects || gameConfig.MainRoom.gameObjects,
-      walls: config.walls || gameConfig.MainRoom.walls,
-      cutSceneSpaces: config.cutSceneSpaces || null
-    })
-
+  initMap (config) {
+    this.map = new OverworldMap(
+      _.isEmpty(config) ? gameConfig.MainRoom : config
+    )
+    this.map.overworld = this
     this.map.mountObjects()
-
     if (config.isCutScene) {
       this.map.checkForFootstepCutscene(this.player)
     }
+  }
+
+  init (config = {}) {
+    this.initMap(config)
 
     this.startGameLoop()
   }

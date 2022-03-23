@@ -24,6 +24,11 @@ export default class Person extends GameObject {
     if (this.isPlayerControlled) {
       updateDb(this.playerRef, { x: this.x, y: this.y })
     }
+    if (this.movingProgressRemaining === 0) {
+      utils.emitEvent('PersonWalkingComplete', {
+        id: this.id
+      })
+    }
   }
 
   updateSprite () {
