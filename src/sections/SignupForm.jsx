@@ -34,7 +34,7 @@ export default function SignupForm ({ setCurrentState, onSubmit, isLoading }) {
 			<div>
 				<label
 					htmlFor='email'
-					className='block text-sm font-medium text-gray-700'>
+					className='block text-sm font-medium text-lightblue'>
 					Email address
 				</label>
 				<div className='mt-1'>
@@ -42,7 +42,7 @@ export default function SignupForm ({ setCurrentState, onSubmit, isLoading }) {
 						{...register('email')}
 						id='email'
 						name='email'
-						className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+						className='bg-lightblue appearance-none block w-full px-3 py-2 border border-blue rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-900 focus:border-indigo-900 sm:text-sm'
 					/>
 				</div>
 				<ErrorMessage errors={errors} input='email' />
@@ -51,7 +51,7 @@ export default function SignupForm ({ setCurrentState, onSubmit, isLoading }) {
 			<div>
 				<label
 					htmlFor='password'
-					className='block text-sm font-medium text-gray-700'>
+					className='block text-sm font-medium text-lightblue'>
 					Password
 				</label>
 				<div className='mt-1'>
@@ -60,7 +60,7 @@ export default function SignupForm ({ setCurrentState, onSubmit, isLoading }) {
 						id='password'
 						name='password'
 						type='password'
-						className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+						className='bg-lightblue appearance-none block w-full px-3 py-2 border border-blue rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-900 focus:border-indigo-900 sm:text-sm'
 					/>
 				</div>
 				<ErrorMessage errors={errors} input='password' />
@@ -69,7 +69,7 @@ export default function SignupForm ({ setCurrentState, onSubmit, isLoading }) {
 			<div>
 				<label
 					htmlFor='confirm-password'
-					className='block text-sm font-medium text-gray-700'>
+					className='block text-sm font-medium text-lightblue'>
 					Re-Enter Password
 				</label>
 				<div className='mt-1'>
@@ -78,13 +78,13 @@ export default function SignupForm ({ setCurrentState, onSubmit, isLoading }) {
 						id='confirm-password'
 						name='confirm-password'
 						type='password'
-						className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+						className='bg-lightblue appearance-none block w-full px-3 py-2 border border-blue rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-900 focus:border-indigo-900 sm:text-sm'
 					/>
 				</div>
 				<ErrorMessage errors={errors} input='confirm-password' />
 			</div>
 			<div className='flex items-center justify-between'>
-				<div className='flex items-center'>
+				{/* <div className='flex items-center'>
 					<input
 						id='remember-me'
 						name='remember-me'
@@ -96,12 +96,12 @@ export default function SignupForm ({ setCurrentState, onSubmit, isLoading }) {
 						className='ml-2 block text-sm text-gray-900'>
 						Sign me up for newsletters
 					</label>
-				</div>
+				</div> */}
 
 				<div className='text-sm'>
 					<div
 						onClick={() => setCurrentState('Login')}
-						className='font-medium text-indigo-600 hover:text-indigo-500'>
+						className='font-medium text-lightblue hover:text-indigo-900'>
 						Already have an account?
 					</div>
 				</div>

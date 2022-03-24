@@ -3,6 +3,7 @@ import _ from 'lodash'
 
 import images from '../assets'
 import Overworld from '../game/Overworld'
+import Chat from './Chat'
 
 import app from '../firebaseConfig'
 import {
@@ -88,17 +89,17 @@ export default function GameCanvas () {
     }
   }, [store.user])
   return (
-
-    <div className="w-full h-screen">
-		<div className='h-[198px] w-[352px] relative absolute bottom-0 m-auto mt-4 scale-[4] pt-20'>
-			<canvas
-				ref={canvasRef}
-				height='198'
-				width='352'
-        className="rounded"
-				style={{ imageRendering: 'pixelated' }}
-			/>
+		<div className='w-full h-screen'>
+			<div className='h-[198px] w-[352px] absolute bottom-0 left-0 right-0 top-0 m-auto scale-[4]'>
+				<canvas
+					ref={canvasRef}
+					height='198'
+					width='352'
+					className='rounded'
+					style={{ imageRendering: 'pixelated' }}
+				/>
+        <Chat />
+			</div>
 		</div>
-    </div>
   )
 }

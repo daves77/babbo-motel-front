@@ -6,7 +6,6 @@ import CheckUserAuth from './layouts/CheckUserAuth'
 import GameCanvas from './components/GameCanvas'
 import CharacterCustomisation from './components/CharacterCusomisation'
 import Signup from './pages/Signup'
-import Chat from './components/Chat'
 import Test from './components/Test'
 
 function App () {
@@ -16,7 +15,6 @@ function App () {
 				<Route path='/game' element={<GameCanvas />} />
 				<Route path='/custom' element={<CharacterCustomisation />} />
 				<Route path='/signup' element={<Signup />} />
-				<Route path="/chat" element={<Chat/>} />
 				<Route path="/test" element={<Test/>} />
 			</Routes>
 		</CheckUserAuth>
