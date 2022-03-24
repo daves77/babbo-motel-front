@@ -4,6 +4,8 @@ import _ from 'lodash'
 import images from '../assets'
 import Overworld from '../game/Overworld'
 import Chat from './Chat'
+import GameMenu from './GameMenu'
+import EditCharacter from './EditCharacter'
 
 import app from '../firebaseConfig'
 import {
@@ -90,8 +92,8 @@ export default function GameCanvas () {
   }, [store.user])
   return (
 		<div className='w-full h-screen'>
-      <div className=''>
 			<div className='h-[198px] w-[352px] absolute bottom-0 top-0 right-0 left-0 m-auto scale-[4]'>
+         <GameMenu />
 				<canvas
 					ref={canvasRef}
 					height='198'
@@ -101,7 +103,7 @@ export default function GameCanvas () {
 				/>
         <Chat />
 			</div>
-      </div>
+      <EditCharacter />
 		</div>
   )
 }
