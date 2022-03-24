@@ -35,6 +35,7 @@ export default class Customise {
     Object.keys(this.attributes).forEach(attribute => {
       if (this.attributes[attribute]) {
         this.attributes[attribute].drawSpriteSheet(ctx)
+        // this.attributes[attribute].image.crossOrigin = 'anonymous'
       }
     })
 

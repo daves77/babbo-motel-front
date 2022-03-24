@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import SignupForm from '../sections/SignupForm'
 import LoginForm from '../sections/LoginForm'
+import CharacterCustomisation from './CharacterCusomisation'
 
 import { Context, loadUserAction } from '../store'
 
@@ -43,7 +44,11 @@ export default function LoginModal () {
       console.log(userRes.data)
       await dispatch(loadUserAction(userRes.data))
       setIsLoading(false)
-      navigate('/game', { replace: true })
+      if (userRes.data.sprite) {
+        navigate('/game', { replace: true })
+      } else {
+        setCurrentState('Sprite')
+      }
     } catch (err) {
       console.log(err.response)
       setIsLoading(false)
@@ -55,7 +60,9 @@ export default function LoginModal () {
 		<>
 			{isOpen && (
 				<div className='min-h-full relative flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
-					<div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
+          {currentState !== 'Sprite'
+            ? (
+            	<div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
 						<div className='bg-darkblue py-8 px-4 shadow sm:rounded-lg sm:px-10'>
 							<Tabs
 								tabs={tabs}
@@ -80,6 +87,10 @@ export default function LoginModal () {
                   )}
 						</div>
 					</div>
+              )
+            : (
+            <CharacterCustomisation />
+              )}
 				</div>
 			)}
 		</>
