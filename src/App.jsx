@@ -7,6 +7,7 @@ import GameCanvas from './components/GameCanvas'
 import CharacterCustomisation from './components/CharacterCusomisation'
 import Signup from './pages/Signup'
 import Chat from './components/Chat'
+import Test from './components/Test'
 
 function App () {
   return (
@@ -16,6 +17,7 @@ function App () {
 				<Route path='/custom' element={<CharacterCustomisation />} />
 				<Route path='/signup' element={<Signup />} />
 				<Route path="/chat" element={<Chat/>} />
+				<Route path="/test" element={<Test/>} />
 			</Routes>
 		</CheckUserAuth>
   )
