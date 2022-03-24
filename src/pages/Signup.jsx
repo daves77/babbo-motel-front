@@ -20,24 +20,19 @@ export default function Signup () {
         isPlayerControlled: true
       }
     })
-
-    overworld.init({
-      lowerSrc: gameConfig.SignUpRoom.lowerSrc,
-      upperSrc: gameConfig.SignUpRoom.upperSrc,
-      gameObjects: gameConfig.SignUpRoom.gameObjects,
-      cutSceneSpaces: gameConfig.SignUpRoom.cutSceneSpaces,
-      isCutScene: true
-    })
+    gameConfig.SignUpRoom.isCutScene = true
+    overworld.init(gameConfig.SignUpRoom)
   })
 
   return (
 		<>
 			<div className='w-full h-screen '>
-					<div className='h-[198px] w-[352px] absolute bottom-0 left-0 right-0 top-0 m-auto outline-dotted outline-1 outline-gray-600 scale-[3]'>
+					<div className='h-[198px] w-[352px] absolute bottom-0 left-0 right-0 top-0 m-auto scale-[4]'>
 						<canvas
 							ref={canvasRef}
 							height='198px'
 							width='352'
+              className="rounded"
 							style={{ imageRendering: 'pixelated' }}
 						/>
 						<TextBox />

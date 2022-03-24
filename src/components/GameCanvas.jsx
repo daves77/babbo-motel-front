@@ -56,8 +56,8 @@ export default function GameCanvas () {
               playerRef = ref(db, `players/${user.uid}`)
               set(playerRef, {
                 id: user.uid,
-                x: utils.withGrid(6),
-                y: utils.withGrid(7),
+                x: utils.withGrid(15),
+                y: utils.withGrid(11),
                 direction: 'down',
                 sprite: userInfo.sprite.main,
                 username: userInfo.username
@@ -88,13 +88,17 @@ export default function GameCanvas () {
     }
   }, [store.user])
   return (
-		<div className='h-[198px] w-[352px] relative outline-dotted outline-1 outline-gray-600 m-auto mt-4 scale-[2] translate-y-2/4'>
+
+    <div className="w-full h-screen">
+		<div className='h-[198px] w-[352px] relative absolute bottom-0 m-auto mt-4 scale-[4] pt-20'>
 			<canvas
 				ref={canvasRef}
-				height='198px'
+				height='198'
 				width='352'
+        className="rounded"
 				style={{ imageRendering: 'pixelated' }}
 			/>
 		</div>
+    </div>
   )
 }

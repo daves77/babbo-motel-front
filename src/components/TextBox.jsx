@@ -28,7 +28,7 @@ export default function TextBox () {
           <div className="flex justify-between">
 					<p className=''>{message}</p>
 					<button type='button' className="justify-self-end" onClick={closeTextMessage}>
-						next
+						Next
 					</button>
           </div>
 				</div>
