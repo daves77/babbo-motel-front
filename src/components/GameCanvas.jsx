@@ -90,16 +90,18 @@ export default function GameCanvas () {
   }, [store.user])
   return (
 		<div className='w-full h-screen'>
-			<div className='h-[198px] w-[352px] absolute bottom-0 left-0 right-0 top-0 m-auto scale-[4]'>
+      <div className=''>
+			<div className='h-[198px] w-[352px] absolute bottom-0 top-0 right-0 left-0 m-auto scale-[4]'>
 				<canvas
 					ref={canvasRef}
 					height='198'
 					width='352'
-					className='rounded'
+					className='rounded '
 					style={{ imageRendering: 'pixelated' }}
 				/>
         <Chat />
 			</div>
+      </div>
 		</div>
   )
 }

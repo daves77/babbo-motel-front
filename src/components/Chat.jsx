@@ -13,11 +13,11 @@ export default function Chat () {
   }, [])
 
   return (
-		<div className=' absolute left-0 w-full bottom-0   h-12 text-xs rounded-b bg-slate-900/[.50]'>
-			<div className='relative w-full'>
+		<div className=' absolute left-0 w-full bottom-0  h-12 rounded-b bg-darkblue/[.60]'>
+			<div className='relative w-full ' style={{ fontSize: '6.4px' }}>
 				{socket && (
-					<div className='grid grid-rows-3'>
-						<div className='row-span-2'>
+					<div className='grid grid-rows-5 '>
+						<div className='row-span-4'>
 							<Messages socket={socket} />
 						</div>
 						<div className='row-span-1'>

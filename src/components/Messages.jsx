@@ -12,16 +12,11 @@ export default function Messages ({ socket }) {
     })
   }, [])
 
-  useEffect(() => {
-    console.log('called')
-    chatboxRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
-  }, [messages])
-
   return (
-		<div ref={chatboxRef} className='relative w-full  h-8'>
+		<div ref={chatboxRef} className='absolute w-full  h-8 p-1'>
       <ScrollableFeed forceScroll={true}>
 			{messages.map((messageObj, idx) => (
-				<div key={idx}>
+				<div key={idx} className="text-white">
 					{messageObj.username}: {messageObj.message}
 				</div>
 			))}

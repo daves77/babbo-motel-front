@@ -20,12 +20,12 @@ export default function ChatInput ({ socket }) {
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className='flex '>
 				<input
-					className='w-full'
+					className='w-full bg-darkblue/[0.6] rounded-bl  text-white focus:outline-none pl-1'
 					type='text'
 					name='message'
 					{...register('message')}
 				/>
-				<button type='submit'>send</button>
+				<button type='submit' className="px-2 bg-indigo-300/[0.8] rounded-br ">Send</button>
 			</div>
 		</form>
   )
