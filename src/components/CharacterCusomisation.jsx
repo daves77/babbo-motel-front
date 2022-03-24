@@ -18,7 +18,7 @@ const tabs = [
 
 export default function CharacterCustomisation () {
   const { store, dispatch } = useContext(Context)
-	  const [currentState, setCurrentState] = useState(tabs[0].name)
+  const [currentState, setCurrentState] = useState(tabs[0].name)
   const canvasRef = useRef()
   const hiddenCanvasRef = useRef()
   const [customiseCanvas, setCustomiseCanvas] = useState(null)
@@ -33,10 +33,6 @@ export default function CharacterCustomisation () {
 
     customiseCanvas.init()
     setCustomiseCanvas(customiseCanvas)
-    // setTimeout(() => {
-    //   const dl = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
-    //   window.location.href = dl
-    // }, 2000)
   }, [])
 
   const onCreate = async () => {
@@ -68,8 +64,8 @@ export default function CharacterCustomisation () {
 			/>
 			<div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
 				<div className=' shadow sm:rounded-lg'>
-					<div className='grid grid-rows-2 grid-cols-1'>
-						<div className='w-full h-full relative bg-blue rounded-t' >
+					<div className='grid grid-rows-5 grid-cols-1'>
+						<div className='w-full h-full relative bg-blue rounded-t row-span-2'>
 							<canvas
 								ref={canvasRef}
 								height='32'
@@ -77,18 +73,59 @@ export default function CharacterCustomisation () {
 								className='scale-[4] m-auto mt-12'
 								style={{ imageRendering: 'pixelated' }}
 							/>
-
 						</div>
-						<div className="bg-darkblue">
-							<div className="px-8">
-							<Tabs tabs={tabs} currentState={currentState} setCurrentState={setCurrentState}/>
-							{customiseCanvas && (
-								<div className="px-8 py-4">
-							<Attributes customise={customiseCanvas} attributePlural="Bodies" attributeSingular="Body" limit={7}/>
-								</div>
-							)}
+						<div className='bg-darkblue rounded-b row-span-3'>
+							<div className='px-8'>
+								<Tabs
+									tabs={tabs}
+									currentState={currentState}
+									setCurrentState={setCurrentState}
+								/>
+								{customiseCanvas && (
+									<div className='px-8 py-4'>
+										{currentState === 'Body' && (
+											<Attributes
+												customise={customiseCanvas}
+												attributePlural='Bodies'
+												attributeSingular='Body'
+												limit={7}
+											/>
+										)}
+										{currentState === 'Eyes' && (
+											<Attributes
+												customise={customiseCanvas}
+												attributePlural='Eyes'
+												attributeSingular='Eyes'
+												limit={7}
+											/>
+										)}
+										{currentState === 'Hairstyle' && (
+											<Attributes
+												customise={customiseCanvas}
+												attributePlural='Hairstyles'
+												attributeSingular='Hairstyle'
+												limit={40}
+											/>
+										)}
+										{currentState === 'Clothing' && (
+											<Attributes
+												customise={customiseCanvas}
+												attributePlural='Outfits'
+												attributeSingular='Outfit'
+												limit={8}
+											/>
+										)}
+										{currentState === 'Accessory' && (
+											<Attributes
+												customise={customiseCanvas}
+												attributePlural='Accessories'
+												attributeSingular='Accessory'
+												limit={80}
+											/>
+										)}
+									</div>
+								)}
 							</div>
-
 						</div>
 					</div>
 					{/* <div className='flex justify-center mt-8'>

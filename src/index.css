@@ -9,3 +9,6 @@
   font-family: "VT323", monospace;
 }
 
+ ::-webkit-scrollbar {
+        background-color: transparent
+    }

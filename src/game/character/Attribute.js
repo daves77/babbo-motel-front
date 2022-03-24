@@ -4,7 +4,7 @@ export default class Attribute {
   constructor (config) {
     this.image = new Image()
     this.image.src = config.src
-    this.image.crossOrigin = 'anonymous'
+    // this.image.crossOrigin = 'anonymous'
     this.image.onload = () => {
       this.isLoaded = true
     }
