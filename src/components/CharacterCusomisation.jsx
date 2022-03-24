@@ -2,17 +2,26 @@
 import React, { useRef, useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 
-import AttributeButtons from './AttributeButtons'
+// import AttributeButtons from './AttributeButtons'
+import Attributes from './attributes/Attributes'
 import Customise from '../game/character/Customise'
+import Tabs from '../components/Tabs'
 import { Context } from '../store'
+
+const tabs = [
+  { name: 'Body', current: true },
+  { name: 'Eyes', current: true },
+  { name: 'Hairstyle', current: true },
+  { name: 'Clothing', current: false },
+  { name: 'Accessory', current: false }
+]
 
 export default function CharacterCustomisation () {
   const { store, dispatch } = useContext(Context)
+	  const [currentState, setCurrentState] = useState(tabs[0].name)
   const canvasRef = useRef()
   const hiddenCanvasRef = useRef()
   const [customiseCanvas, setCustomiseCanvas] = useState(null)
-  const [username, setUsername] = useState('')
-  const [randomise, setRandomise] = useState(false) // just used to rerender state
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -37,7 +46,6 @@ export default function CharacterCustomisation () {
     const data = new FormData()
     data.append('file', blob)
     data.append('attributes', JSON.stringify(customiseCanvas.spriteAttributes))
-    data.append('username', username)
     await axios.post(
 			`${process.env.REACT_APP_BACKEND_URL}/api/sprite/create`,
 			data,
@@ -59,74 +67,37 @@ export default function CharacterCustomisation () {
 				className='hidden'
 			/>
 			<div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
-				<div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
-					<div className='flex justify-between'>
-						<div className='w-full relative'>
+				<div className=' shadow sm:rounded-lg'>
+					<div className='grid grid-rows-2 grid-cols-1'>
+						<div className='w-full h-full relative bg-blue rounded-t' >
 							<canvas
 								ref={canvasRef}
 								height='32'
 								width='16'
-								className='scale-[5] absolute top-0 bottom-16 right-0 left-0 m-auto'
+								className='scale-[4] m-auto mt-12'
 								style={{ imageRendering: 'pixelated' }}
 							/>
-							<input
-								className='absolute bottom-0 right-0 left-0 m-auto w-20 appearance-none block  px-2 py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
-								type='text'
-								placeholder='username'
-								value={username}
-								onChange={(e) => setUsername(e.target.value)}
-							/>
+
 						</div>
-						<div>
+						<div className="bg-darkblue">
+							<div className="px-8">
+							<Tabs tabs={tabs} currentState={currentState} setCurrentState={setCurrentState}/>
 							{customiseCanvas && (
-								<>
-									<button
-										type='button'
-										onClick={() => setRandomise(!randomise)}>
-										Randomize
-									</button>
-									<AttributeButtons
-										customise={customiseCanvas}
-										attributePlural='Bodies'
-										attributeSingular='Body'
-										limit={9}
-										randomise={randomise}
-									/>
-									<AttributeButtons
-										customise={customiseCanvas}
-										attributePlural='Eyes'
-										attributeSingular='Eyes'
-										limit={7}
-									/>
-									<AttributeButtons
-										customise={customiseCanvas}
-										attributePlural='Outfits'
-										attributeSingular='Outfit'
-										limit={132}
-									/>
-									<AttributeButtons
-										customise={customiseCanvas}
-										attributePlural='Hairstyles'
-										attributeSingular='Hairstyle'
-										limit={200}
-									/>
-									<AttributeButtons
-										customise={customiseCanvas}
-										attributePlural='Accessories'
-										attributeSingular='Accessory'
-										limit={84}
-									/>
-								</>
+								<div className="px-8 py-4">
+							<Attributes customise={customiseCanvas} attributePlural="Bodies" attributeSingular="Body" limit={7}/>
+								</div>
 							)}
+							</div>
+
 						</div>
 					</div>
-					<div className='flex justify-center mt-8'>
+					{/* <div className='flex justify-center mt-8'>
 						<button
 							onClick={onCreate}
 							className='w-40 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
 							Create Character
 						</button>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>
