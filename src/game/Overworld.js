@@ -72,8 +72,10 @@ export default class Overworld {
       isPlayerControlled: user.isPlayerControlled,
       playerRef: user.isPlayerControlled ? this.playerRef : null
     })
+
     if (user.isPlayerControlled) {
       this.player = this.map.gameObjects.person[user.id]
+      console.log(this.player)
       this.directionInput = new DirectionInput({
         playerRef: this.playerRef,
         person: this.player
