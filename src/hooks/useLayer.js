@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 export const createAssetUrl = (partPlural, partSingular, index, size = '16x16') => {
   const baseUrl =
-		'https://babbo-motel.s3.ap-southeast-1.amazonaws.com/Character_Generation'
+		'/images/Character_Generation'
   return `${baseUrl}/${partPlural}/${size}/${partSingular}_${index}.png`
 }
 

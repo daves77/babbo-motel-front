@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 
 import ErrorMessage from '../components/ErrorMessage'
@@ -28,6 +29,7 @@ const schema = yup.object({
 
 export default function CharacterCustomisation () {
   const { store, dispatch } = useContext(Context)
+  const navigate = useNavigate()
   const [currentState, setCurrentState] = useState(tabs[0].name)
   const [stage, setStage] = useState(true)
   const [customiseCanvas, setCustomiseCanvas] = useState(null)
@@ -38,6 +40,7 @@ export default function CharacterCustomisation () {
   } = useForm({ resolver: yupResolver(schema) })
   const canvasRef = useRef()
   const hiddenCanvasRef = useRef()
+  const hiddenCanvasRef2 = useRef()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -52,23 +55,28 @@ export default function CharacterCustomisation () {
   }, [])
 
   const onCreate = async (e) => {
-    const canvas = hiddenCanvasRef.current
-    const blob = customiseCanvas.saveSprite(canvas)
+    console.log(e)
+    const canvas1 = hiddenCanvasRef.current
+    const canvas2 = hiddenCanvasRef2.current
+    const [spriteSheetBlob, headBlob] = customiseCanvas.saveSprite(canvas1, canvas2)
     // include jwt with request
     const data = new FormData()
-    data.append('file', blob)
+    data.append('file', spriteSheetBlob)
+    data.append('file', headBlob)
     data.append('attributes', JSON.stringify(customiseCanvas.spriteAttributes))
     data.append('username', e.username)
-    // await axios.post(
-    // 	`${process.env.REACT_APP_BACKEND_URL}/api/sprite/create`,
-    // 	data,
-    // 	{
-    // 	  headers: {
-    // 	    'Content-Type': 'application/json',
-    // 	    Authorization: `${localStorage.getItem('token')}`
-    // 	  }
-    // 	}
-    // )
+    await axios.post(
+    	`${process.env.REACT_APP_BACKEND_URL}/api/sprite/create`,
+    	data,
+    	{
+    	  headers: {
+    	    'Content-Type': 'application/json',
+    	    Authorization: `${localStorage.getItem('token')}`
+    	  }
+    	}
+    )
+    console.log('navigating')
+    navigate('/game', { replace: true })
   }
 
   return (
@@ -77,6 +85,12 @@ export default function CharacterCustomisation () {
 				ref={hiddenCanvasRef}
 				height='656'
 				width='927'
+				className='hidden'
+			/>
+			<canvas
+				ref={hiddenCanvasRef2}
+				height='24'
+				width='16'
 				className='hidden'
 			/>
 			<div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>

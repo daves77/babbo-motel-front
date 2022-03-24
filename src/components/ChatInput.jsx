@@ -12,6 +12,7 @@ export default function ChatInput ({ socket }) {
   const onSubmit = (data) => {
     socket.emit('chatMessage', {
       username: user.username,
+      head: user.sprite.head,
       message: data.message
     })
     reset({ message: '' })

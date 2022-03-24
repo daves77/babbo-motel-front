@@ -35,4 +35,20 @@ export default class Attribute {
       )
     }
   }
+
+  drawSpriteHeadSheet (ctx) {
+    if (this.isLoaded) {
+      ctx.drawImage(
+        this.image,
+        utils.withGrid(19),
+        utils.withGrid(2),
+        utils.withGrid(1),
+        utils.withGrid(2) - 8,
+        0,
+        0,
+        utils.withGrid(1),
+        utils.withGrid(2) - 8
+      )
+    }
+  }
 }
