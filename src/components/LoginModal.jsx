@@ -38,6 +38,7 @@ export default function LoginModal () {
       setIsLoading(true)
       setError(null)
       const { email, password } = data
+      console.log(endpoint)
       const tokenRes = await axios.post(endpoint, { email, password })
       localStorage.setItem('token', `Bearer ${tokenRes.data.token}`)
       const userRes = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/info/`, { headers: { Authorization: `${localStorage.getItem('token')}` } })
