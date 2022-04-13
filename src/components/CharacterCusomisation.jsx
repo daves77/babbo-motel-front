@@ -69,7 +69,7 @@ export default function CharacterCustomisation () {
     data.append('attributes', JSON.stringify(customiseCanvas.spriteAttributes))
     data.append('username', e.username)
     await axios.post(
-    	`${process.env.REACT_APP_BACKEND_URL}/api/sprite/create`,
+    	'/api/sprite/create',
     	data,
     	{
     	  headers: {

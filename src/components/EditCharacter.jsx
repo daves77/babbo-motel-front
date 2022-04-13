@@ -58,14 +58,14 @@ export default function CharacterCustomisation () {
     data.append('file', headBlob)
     data.append('attributes', JSON.stringify(customiseCanvas.spriteAttributes))
     await axios.post(
-			`${process.env.REACT_APP_BACKEND_URL}/api/sprite/update`,
-			data,
-			{
+      '/api/sprite/update',
+      data,
+      {
 			  headers: {
 			    'Content-Type': 'application/json',
 			    Authorization: `${localStorage.getItem('token')}`
 			  }
-			}
+      }
     )
     console.log('navigating')
     navigate('/game', { replace: true })
