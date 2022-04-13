@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 
 import ErrorMessage from '../components/ErrorMessage'
+import Spinner from '../components/Spinner'
 import Attributes from './attributes/Attributes'
 import Customise from '../game/character/Customise'
 import Tabs from '../components/Tabs'
@@ -31,6 +32,7 @@ export default function CharacterCustomisation () {
   const { store, dispatch } = useContext(Context)
   const navigate = useNavigate()
   const [currentState, setCurrentState] = useState(tabs[0].name)
+  const [isLoading, setIsLoading] = useState(false)
   const [stage, setStage] = useState(true)
   const [customiseCanvas, setCustomiseCanvas] = useState(null)
   const {
@@ -56,6 +58,7 @@ export default function CharacterCustomisation () {
 
   const onCreate = async (e) => {
     console.log(e)
+    setIsLoading(true)
     const canvas1 = hiddenCanvasRef.current
     const canvas2 = hiddenCanvasRef2.current
     const [spriteSheetBlob, headBlob] = customiseCanvas.saveSprite(canvas1, canvas2)
@@ -75,8 +78,10 @@ export default function CharacterCustomisation () {
     	  }
     	}
     )
-    console.log('navigating')
-    navigate('/game', { replace: true })
+    setTimeout(() => {
+      setIsLoading(false)
+      navigate('/game', { replace: true })
+    }, 2000)
   }
 
   return (
@@ -145,7 +150,7 @@ export default function CharacterCustomisation () {
 													customise={customiseCanvas}
 													attributePlural='Outfits'
 													attributeSingular='Outfit'
-													limit={8}
+													limit={60}
 												/>
 											)}
 											{currentState === 'Accessory' && (
@@ -196,7 +201,18 @@ export default function CharacterCustomisation () {
 										<button
 											onClick={onCreate}
 											className='w-32 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+												{isLoading
+												  ? (
+													<>
+													<Spinner />
+													Creating Character...
+													</>
+												    )
+												  : (
+													<>
 											Create Character
+													</>
+												    )}
 										</button>
 									</div>
 									</div>

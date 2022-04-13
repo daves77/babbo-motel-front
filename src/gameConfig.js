@@ -18,7 +18,16 @@ const map = {
       }
     },
     walls: {
+      [utils.asGridCoord(14, 11)]: true,
+      [utils.asGridCoord(16, 11)]: true,
+      [utils.asGridCoord(18, 11)]: true,
+      [utils.asGridCoord(18, 12)]: true,
+      [utils.asGridCoord(14, 18)]: true,
+      [utils.asGridCoord(15, 18)]: true,
+      [utils.asGridCoord(15, 19)]: true,
       ...utils.drawWallLineCoord([1, 1], [11, 1]),
+      ...utils.drawWallLineCoord([26, 13], [26, 21]),
+      ...utils.drawWallLineCoord([0, 22], [26, 22]),
       ...utils.drawWallLineCoord([0, 3], [0, 10]),
       ...utils.drawWallLineCoord([11, 3], [11, 10])
     },

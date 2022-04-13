@@ -16,7 +16,7 @@ export default function GameMenu () {
   return (
     <>
     {
-      !_.isEmpty(user) && (
+      !_.isEmpty(user) && user.sprite && (
  <div className="absolute h-4 w-16 bg-blue/[0.95] rounded-xl right-0 left-0 mx-auto mt-1">
       <div className="flex justify-between items-center w-full h-full">
         <div className="h-3 w-2 relative ml-1 mb-1">

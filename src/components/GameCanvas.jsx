@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useContext } from 'react'
+import axios from 'axios'
 import _ from 'lodash'
 
 import images from '../assets'
@@ -34,7 +35,8 @@ export default function GameCanvas () {
   useEffect(() => {
     if (!_.isEmpty(store.user)) {
       (async () => {
-        const userInfo = store.user
+        const res = await axios.get('http://localhost:3004/api/user/info', { headers: { Authorization: `${localStorage.getItem('token')}` } })
+        const userInfo = res.data
         const allPlayersRef = ref(db, 'players')
 
         const overworld = new Overworld({
