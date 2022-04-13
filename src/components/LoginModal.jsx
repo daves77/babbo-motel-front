@@ -32,15 +32,15 @@ export default function LoginModal () {
   const onSubmit = async (data) => {
     const endpoint =
 			currentState === 'Sign Up'
-			  ? `${process.env.REACT_APP_BACKEND_URL}user/signup/`
-			  : `${process.env.REACT_APP_BACKEND_URL}user/login/`
+			  ? `${process.env.REACT_APP_BACKEND_URL}/api/user/signup/`
+			  : `${process.env.REACT_APP_BACKEND_URL}/api/user/login/`
     try {
       setIsLoading(true)
       setError(null)
       const { email, password } = data
       const tokenRes = await axios.post(endpoint, { email, password })
       localStorage.setItem('token', `Bearer ${tokenRes.data.token}`)
-      const userRes = await axios.get(`${process.env.REACT_APP_BACKEND_URL}user/info/`, { headers: { Authorization: `${localStorage.getItem('token')}` } })
+      const userRes = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/info/`, { headers: { Authorization: `${localStorage.getItem('token')}` } })
       console.log(userRes.data)
       await dispatch(loadUserAction(userRes.data))
       setIsLoading(false)
