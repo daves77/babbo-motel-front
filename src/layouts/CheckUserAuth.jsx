@@ -11,7 +11,7 @@ export default function CheckUserAuth ({ children }) {
       try {
         const token = localStorage.getItem('token')
         if (token) {
-          const res = await axios.get('/api/user/info/', { headers: { Authorization: token } })
+          const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/info/`, { headers: { Authorization: token } })
           dispatch(loadUserAction(res.data))
           console.log(res.data.sprite)
           if (!res.data.sprite) {
