@@ -18,10 +18,32 @@ const map = {
       }
     },
     walls: {
+      [utils.asGridCoord(14, 11)]: true,
+      [utils.asGridCoord(16, 11)]: true,
+      [utils.asGridCoord(18, 11)]: true,
+      [utils.asGridCoord(18, 12)]: true,
+      [utils.asGridCoord(14, 18)]: true,
+      [utils.asGridCoord(15, 18)]: true,
+      [utils.asGridCoord(15, 19)]: true,
       ...utils.drawWallLineCoord([1, 1], [11, 1]),
+      ...utils.drawWallLineCoord([26, 13], [26, 21]),
+      ...utils.drawWallLineCoord([0, 22], [26, 22]),
       ...utils.drawWallLineCoord([0, 3], [0, 10]),
       ...utils.drawWallLineCoord([11, 3], [11, 10])
+    },
+    cutSceneSpaces: {
+      [utils.asGridCoord(15, 11)]: [
+        {
+          events: [
+            { type: 'changeMap', map: 'Cafe' }
+          ]
+        }
+      ]
     }
+  },
+  Cafe: {
+    lowerSrc: images.CafeRoomL1,
+    uppserSrc: images.CafeRoomL2
   },
   SignUpRoom: {
     lowerSrc: images.SignUpRoomL1,
@@ -39,21 +61,22 @@ const map = {
       [utils.asGridCoord(7.5, 14)]: [
         {
           events: [
-            // { who: 'npc1', type: 'walk', direction: 'down' },
-            // { who: 'npc1', type: 'walk', direction: 'down' },
-            // { who: 'npc1', type: 'walk', direction: 'down' },
-            // { who: 'npc1', type: 'walk', direction: 'down' },
-            // { who: 'npc1', type: 'walk', direction: 'down' },
-            // { who: 'npc1', type: 'stand', direction: 'left', time: 800 },
-            // { who: 'npc1', type: 'stand', direction: 'right', time: 800 },
-            // { who: 'npc1', type: 'stand', direction: 'down', time: 800 },
-            // { type: 'textMessage', text: 'Hey welcome! It\'s been awhile since I\'ve seen a new face around here!' },
-            // { type: 'textMessage', text: 'You look like you\'re new around here.. ' },
-            // { type: 'textMessage', text: 'But!! You do look kind of familiar.. Remind me who you are again?' },
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'walk', direction: 'down' },
+            { who: 'npc1', type: 'stand', direction: 'left', time: 800 },
+            { who: 'npc1', type: 'stand', direction: 'right', time: 800 },
+            { who: 'npc1', type: 'stand', direction: 'down', time: 800 },
+            { type: 'textMessage', text: 'Hey welcome! It\'s been awhile since I\'ve seen a new face around here!' },
+            { type: 'textMessage', text: 'You look like you\'re new around here.. ' },
+            { type: 'textMessage', text: 'But!! You do look kind of familiar.. Remind me who you are again?' },
             { type: 'signUp' }
           ]
         }
       ]
+
     }
   }
 }

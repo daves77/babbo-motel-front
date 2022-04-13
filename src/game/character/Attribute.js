@@ -4,7 +4,7 @@ export default class Attribute {
   constructor (config) {
     this.image = new Image()
     this.image.src = config.src
-    this.image.crossOrigin = 'anonymous'
+    // this.image.crossOrigin = 'anonymous'
     this.image.onload = () => {
       this.isLoaded = true
     }
@@ -32,6 +32,22 @@ export default class Attribute {
         this.image,
         0,
         0
+      )
+    }
+  }
+
+  drawSpriteHeadSheet (ctx) {
+    if (this.isLoaded) {
+      ctx.drawImage(
+        this.image,
+        utils.withGrid(19),
+        utils.withGrid(2),
+        utils.withGrid(1),
+        utils.withGrid(2) - 8,
+        0,
+        0,
+        utils.withGrid(1),
+        utils.withGrid(2) - 8
       )
     }
   }

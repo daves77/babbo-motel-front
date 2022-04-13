@@ -12,7 +12,8 @@ export default class GameObject {
       gameObject: this,
       dimension: this.dimensions,
       animations: config.animations,
-      currentAnimation: config.currentAnimation || null
+      currentAnimation: config.currentAnimation || null,
+      name: config.username || null
     })
   }
 

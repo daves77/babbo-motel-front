@@ -16,8 +16,6 @@ export default function CheckUserAuth ({ children }) {
           console.log(res.data.sprite)
           if (!res.data.sprite) {
             navigate('/custom', { replace: true })
-          } else {
-            navigate('/game', { replace: true })
           }
         } else {
           throw new Error('no token found')
@@ -29,7 +27,7 @@ export default function CheckUserAuth ({ children }) {
     })()
   }, [])
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="">
 
       {children}
 

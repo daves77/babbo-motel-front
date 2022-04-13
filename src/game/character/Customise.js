@@ -29,18 +29,23 @@ export default class Customise {
     step()
   }
 
-  saveSprite (canvas) {
-    const ctx = canvas.getContext('2d')
+  saveSprite (spriteCanvas, headCanvas) {
+    const spriteCtx = spriteCanvas.getContext('2d')
+    const headCtx = headCanvas.getContext('2d')
 
     Object.keys(this.attributes).forEach(attribute => {
       if (this.attributes[attribute]) {
-        this.attributes[attribute].drawSpriteSheet(ctx)
+        this.attributes[attribute].drawSpriteSheet(spriteCtx)
+        this.attributes[attribute].drawSpriteHeadSheet(headCtx)
+        // this.attributes[attribute].image.crossOrigin = 'anonymous'
       }
     })
 
-    const spritesheet = canvas.toDataURL()
-    const blob = utils.dataURItoBlob(spritesheet)
-    return blob
+    const spritesheet = spriteCanvas.toDataURL()
+    const head = headCanvas.toDataURL()
+    const spriteSheetBlob = utils.dataURItoBlob(spritesheet)
+    const headBlob = utils.dataURItoBlob(head)
+    return [spriteSheetBlob, headBlob]
   }
 
   updateAttribute (attribute, attributeObj) {

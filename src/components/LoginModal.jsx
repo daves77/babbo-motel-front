@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import SignupForm from '../sections/SignupForm'
 import LoginForm from '../sections/LoginForm'
+import CharacterCustomisation from './CharacterCusomisation'
 
 import { Context, loadUserAction } from '../store'
 
@@ -19,6 +20,7 @@ export default function LoginModal () {
   const { dispatch } = useContext(Context)
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
   const [currentState, setCurrentState] = useState(tabs[0].name)
 
   useEffect(() => {
@@ -34,6 +36,7 @@ export default function LoginModal () {
 			  : 'http://localhost:3004/api/user/login/'
     try {
       setIsLoading(true)
+      setError(null)
       const { email, password } = data
       const tokenRes = await axios.post(endpoint, { email, password })
       localStorage.setItem('token', `Bearer ${tokenRes.data.token}`)
@@ -41,9 +44,15 @@ export default function LoginModal () {
       console.log(userRes.data)
       await dispatch(loadUserAction(userRes.data))
       setIsLoading(false)
-      navigate('/game', { replace: true })
+      if (userRes.data.sprite) {
+        navigate('/game', { replace: true })
+      } else {
+        setCurrentState('Sprite')
+      }
     } catch (err) {
-      console.log(err)
+      console.log(err.response)
+      setIsLoading(false)
+      setError(err.response.data.error)
     }
   }
 
@@ -51,8 +60,10 @@ export default function LoginModal () {
 		<>
 			{isOpen && (
 				<div className='min-h-full relative flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
-					<div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
-						<div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
+          {currentState !== 'Sprite'
+            ? (
+            	<div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
+						<div className='bg-darkblue py-8 px-4 shadow sm:rounded-lg sm:px-10'>
 							<Tabs
 								tabs={tabs}
 								currentState={currentState}
@@ -69,8 +80,17 @@ export default function LoginModal () {
 							  : (
 								<LoginForm onSubmit={onSubmit} isLoading={isLoading} />
 							    )}
+                  {error && (
+                    <div className="mt-2 text-red-500">
+                      {error}
+                    </div>
+                  )}
 						</div>
 					</div>
+              )
+            : (
+            <CharacterCustomisation />
+              )}
 				</div>
 			)}
 		</>

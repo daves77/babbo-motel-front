@@ -14,10 +14,13 @@ export default class Overworld {
   startGameLoop () {
     const step = () => {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+      this.ctx.fillStyle = 'black'
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
       const cameraPerson = this.player || { x: 0, y: 0 }
 
       this.map.drawLowerImage(this.ctx, cameraPerson)
+      this.map.drawUpperImage(this.ctx, cameraPerson)
 
       Object.values(this.map.gameObjects.person).forEach((obj) => {
         obj.update({
@@ -67,11 +70,14 @@ export default class Overworld {
       y: user.y,
       currentAnimation: `idle-${user.direction}`,
       src: user.sprite,
+      username: user.username,
       isPlayerControlled: user.isPlayerControlled,
       playerRef: user.isPlayerControlled ? this.playerRef : null
     })
+
     if (user.isPlayerControlled) {
       this.player = this.map.gameObjects.person[user.id]
+      console.log(this.player)
       this.directionInput = new DirectionInput({
         playerRef: this.playerRef,
         person: this.player
@@ -91,6 +97,7 @@ export default class Overworld {
     })
 
     this.map.mountObjects()
+
     if (config.isCutScene) {
       this.map.checkForFootstepCutscene(this.player)
     }

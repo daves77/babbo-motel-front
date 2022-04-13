@@ -11,7 +11,7 @@ export default function Tabs ({ tabs, currentState, setCurrentState }) {
   return (
     <div>
       <div className="hidden sm:block">
-        <div className="border-b border-gray-200">
+        <div className="border-b border-gray-400">
           <nav className="-mb-px flex" aria-label="Tabs">
             {tabs.map((tab) => (
               <div
