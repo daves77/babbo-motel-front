@@ -4,6 +4,7 @@ This project was created and developed by [David](https://github.com/daves77 "Da
 
 --- 
 
+![babbo-motel](https://user-images.githubusercontent.com/54523780/163191122-4991bdee-afcc-4669-89c2-d94d8ea3e0fe.png)
 
 ## About Babbo Motel
 Babbo Hotel is a social game where users can customise their own sprites and socialise with other users in the 2D Pixel World. The intial idea was inspired by Habbo Hotel and Gather, both social platforms that are "gamified", hence the name Babbo Motel (motel because the project is of much smaller scale 😆). 
@@ -18,19 +19,20 @@ Frontend Repository (You are currently viewing)
 
 ## Project Demo 
 
+![intro_AdobeCreativeCloudExpress (1)](https://user-images.githubusercontent.com/54523780/163190884-2b39612e-f9b1-4fa3-afc8-c3a1c89f0b92.gif)
 
 #### Registration
  Upon loading the site, users will be greeted by **Jack** Babbo Hotel's very own receptionist, here a short cut scene will play and users will proceed with either logging in or an account registration
 
+![customisation](https://user-images.githubusercontent.com/54523780/163193776-f9796c82-ad96-4e11-9770-d900077067f8.gif)
 
 #### Customisation
  If users are creating a new account, they'll be redirected to the character customisation. This is where users get to select from 100+ different options of items. 
 
+![chat](https://user-images.githubusercontent.com/54523780/163202960-37e94bb7-9e3f-4772-bc66-0bdafe2b5127.gif)
 
 #### Chat & Explore
 Walk around the world and meet new people! Use the chat at the bottom of screen to say hi
-
-
 
 
 
