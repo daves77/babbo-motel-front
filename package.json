@@ -1,7 +1,8 @@
 {
   "name": "motel",
   "version": "0.1.0",
-  "private": true,
+  "private": true, 
+  "proxy": "https://secure-refuge-41573.herokuapp.com/",
   "dependencies": {
     "@heroicons/react": "^1.0.6",
     "@hookform/resolvers": "^2.8.8",
