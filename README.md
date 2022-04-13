@@ -12,9 +12,9 @@ Babbo Hotel is a social game where users can customise their own sprites and soc
 Babbo Hotel came from a personal curiousity to understand & explore how a game would run on a browser. The idea was also largely inspired by the rise of web3 and gamefi with the integration of NFT for in-game item however but due to the time constraint, the idea had to be put aside for future development.
 
 ## Project Links 
-Frontend Repository (You are currently viewing)
-[Backend Repository](https://github.com/daves77/babbo-motel-back)
-[Deployed Site](https://fathomless-reaches-09503.herokuapp.com/)
+- Frontend Repository (You are currently viewing)
+- [Backend Repository](https://github.com/daves77/babbo-motel-back)
+- [Deployed Site](https://fathomless-reaches-09503.herokuapp.com/)
 
 
 ## Project Demo 
