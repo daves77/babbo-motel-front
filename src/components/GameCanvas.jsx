@@ -35,7 +35,7 @@ export default function GameCanvas () {
   useEffect(() => {
     if (!_.isEmpty(store.user)) {
       (async () => {
-        const res = await axios.get('http://localhost:3004/api/user/info', { headers: { Authorization: `${localStorage.getItem('token')}` } })
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}user/info/`, { headers: { Authorization: `${localStorage.getItem('token')}` } })
         const userInfo = res.data
         const allPlayersRef = ref(db, 'players')
 

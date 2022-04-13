@@ -8,7 +8,7 @@ export default function Chat () {
   const [socket, setSocket] = useState(null)
 
   useEffect(() => {
-    const socketInstance = io('http://localhost:3004')
+    const socketInstance = io(process.env.REACT_APP_BACKEND_URL)
     setSocket(socketInstance)
   }, [])
 
