@@ -19,7 +19,8 @@ Babbo Hotel came from a personal curiousity to understand & explore how a game w
 
 ## Project Demo 
 
-![intro_AdobeCreativeCloudExpress (1)](https://user-images.githubusercontent.com/54523780/163190884-2b39612e-f9b1-4fa3-afc8-c3a1c89f0b92.gif)
+
+![intro](https://user-images.githubusercontent.com/54523780/163300341-6414133e-5b8d-4e15-8f58-f5ea797319dd.gif)
 
 #### Registration
  Upon loading the site, users will be greeted by **Jack** Babbo Hotel's very own receptionist, here a short cut scene will play and users will proceed with either logging in or an account registration
